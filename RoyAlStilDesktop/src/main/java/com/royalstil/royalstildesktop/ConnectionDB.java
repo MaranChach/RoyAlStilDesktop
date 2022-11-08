@@ -97,7 +97,7 @@ public class ConnectionDB {
 
     public ArrayList selectQueryArr(String query) throws IOException, SQLException {
         ResultSet resultSet = null;
-        ArrayList result = new ArrayList<>();
+        ArrayList<Client> result = new ArrayList<Client>();
         try {
             if (connection == null) {
                 connection = Connect();
@@ -105,8 +105,8 @@ public class ConnectionDB {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
 
-            while (resultSet.next()) {
-                result.add(resultSet.getString("name"));
+            while (resultSet.next()){
+                result.add(new Client(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getDate(8)));
             }
 
             return result;

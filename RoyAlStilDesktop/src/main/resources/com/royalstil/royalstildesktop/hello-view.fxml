@@ -17,10 +17,14 @@
     <Label fx:id="welcomeText"/>
     <TableView fx:id="tableSex">
         <columns>
-
-            <TableColumn text="name">
-
-            </TableColumn>
+            <TableColumn fx:id="id_client" text="clid1"></TableColumn>
+            <TableColumn fx:id="first_name_client" text="fn"></TableColumn>
+            <TableColumn fx:id="second_name_client" text="sn"></TableColumn>
+            <TableColumn fx:id="login_client" text="log"></TableColumn>
+            <TableColumn fx:id="password_client" text="pass"></TableColumn>
+            <TableColumn fx:id="phone_client" text="phone"></TableColumn>
+            <TableColumn fx:id="email_client" text="email"></TableColumn>
+            <TableColumn fx:id="birth_date_client" text="bd"></TableColumn>
         </columns>
     </TableView>
     <Button text="Hello!" onAction="#onHelloButtonClick"/>
