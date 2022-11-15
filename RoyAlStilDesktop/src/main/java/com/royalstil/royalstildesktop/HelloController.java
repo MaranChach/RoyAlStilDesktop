@@ -5,10 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArrayBase;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -18,8 +20,11 @@ import java.util.List;
 
 
 public class HelloController {
+    private Font fontInter = new Font(getClass().getResource("InterFont/Inter-V.ttf").toExternalForm(), 18);
     @FXML
     private Label welcomeText;
+    @FXML
+    private Button searchButton;
     @FXML
     protected TableView tableSex;
     @FXML
@@ -27,7 +32,9 @@ public class HelloController {
 
     @FXML
     void initialize(){
+        searchButton.setFont(fontInter);
         setTableSettings();
+
     }
 
     public void setTableSettings(){

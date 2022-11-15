@@ -1,0 +1,35 @@
+.menuButton{
+    -fx-background-color: rgb(170, 170, 170);
+    -fx-background-radius: 0;
+}
+
+.menuButton:hover{
+    -fx-background-color: rgb(154, 154, 154);
+}
+
+.menuPane{
+    -fx-background-color: rgb(217, 217, 217);
+}
+
+.mainTable{
+    -fx-background-radius: 10;
+    -fx-border-color: grey;
+    -fx-border-radius: 10;
+}
+
+.addButton{
+    -fx-background-color: rgb(4, 191, 0);
+    -fx-background-radius: 30;
+}
+
+.addButton:hover{
+    -fx-background-color: rgb(4, 133, 0);
+}
+
+.searchField{
+    -fx-background-radius: 30;
+}
+
+.tableColumn{
+    -fx-background-radius: 30;
+}
