@@ -14,12 +14,12 @@
    <children>
       <VBox prefHeight="471.0" prefWidth="175.0" styleClass="menuPane" stylesheets="@style.css">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="215.0" text="RoyAlStil">
+            <Label fx:id="logoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="215.0" text="RoyAlStil">
                <font>
                   <Font name="Segoe UI Bold" size="18.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Заказы">
+            <Button fx:id="ordersButton" mnemonicParsing="false" onAction="#onButtonOrdersClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Заказы">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Клиенты">
+            <Button fx:id="clientsButton" mnemonicParsing="false" onAction="#onButtonClientsClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Клиенты">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -35,7 +35,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Поступления">
+            <Button fx:id="receiptsButton" mnemonicParsing="false" onAction="#onButtonReceiptsClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Поступления">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -43,7 +43,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Остатки">
+            <Button fx:id="goodsButton" mnemonicParsing="false" onAction="#onButtonGoodsClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Остатки">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -51,7 +51,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Списание">
+            <Button fx:id="writeOffButton" mnemonicParsing="false" onAction="#onButtonWriteOffClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Списание">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -59,7 +59,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Поставщики">
+            <Button fx:id="providersButton" mnemonicParsing="false" onAction="#onButtonProvidersClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Поставщики">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -71,10 +71,16 @@
       </VBox>
       <AnchorPane layoutX="176.0" prefHeight="471.0" prefWidth="521.0">
          <children>
-            <TableView prefHeight="364.0" prefWidth="526.0" styleClass="mainTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <TableView fx:id="clientsTable" prefHeight="364.0" prefWidth="526.0" styleClass="mainTable" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="C1" />
+                  <TableColumn prefWidth="75.0" text="C2" />
+               </columns>
+            </TableView>
+            <TableView fx:id="ordersTable" prefHeight="364.0" prefWidth="526.0" styleClass="mainTable" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn prefWidth="75.0" text="ord" />
               </columns>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -85,7 +91,7 @@
                   <Font name="Segoe UI" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="searchButton" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" styleClass="addButton" text="Добавить" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="44.0">
+            <Button fx:id="addButton" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" styleClass="addButton" text="Добавить" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="44.0">
                <font>
                   <Font size="16.0" />
                </font>
