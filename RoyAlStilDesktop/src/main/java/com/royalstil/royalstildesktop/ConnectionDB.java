@@ -1,5 +1,12 @@
 package com.royalstil.royalstildesktop;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.util.Callback;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,8 +14,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ConnectionDB {
-
-
     private Connection connection = null;
     private Statement statement = null;
 
@@ -30,16 +35,18 @@ public class ConnectionDB {
         return "PKS";
     }
 
-    public static Connection Connect() throws IOException, SQLException{
+    public Connection Connect() throws IOException, SQLException{
         Connection connection = null;
         try{
             connection = DriverManager.getConnection(GetConnectionString(), GetLogin(), GetPassword());
+            this.connection = connection;
             return connection;
         }
         catch (SQLException e){
             System.out.println("Connection error");
             e.printStackTrace();
         }
+        this.connection = connection;
         return connection;
     }
 
@@ -95,7 +102,7 @@ public class ConnectionDB {
         return resultSet;
     }
 
-    public ArrayList selectQueryArr(String query) throws IOException, SQLException {
+    /*public ArrayList selectQueryArr(String query) throws IOException, SQLException {
         ResultSet resultSet = null;
         ArrayList<Client> result = new ArrayList<Client>();
         try {
@@ -120,5 +127,5 @@ public class ConnectionDB {
                 statement.close();
         }
         return result;
-    }
+    }*/
 }

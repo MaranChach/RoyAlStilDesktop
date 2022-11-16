@@ -72,10 +72,7 @@
       <AnchorPane layoutX="176.0" prefHeight="471.0" prefWidth="521.0">
          <children>
             <TableView fx:id="mainTable" prefHeight="364.0" prefWidth="526.0" styleClass="mainTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
-               </columns>
+
             </TableView>
             <Label text="Заголовок" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
