@@ -41,11 +41,11 @@ public class HelloController {
         //id_client.setCellValueFactory(new PropertyValueFactory<>("clid"));
     }
 
-    @FXML
+    /*@FXML
     protected void onHelloButtonClick() throws SQLException, IOException {
         tableSex.getColumns().clear();
         ConnectionDB connectionDB = new ConnectionDB();
-        List<Client> list = connectionDB.selectQueryArr("select * from \"Main\".clients");
+        List<Client> list = connectionDB.selectQuery("select * from \"Main\".clients");
         ObservableList<Client> clients = FXCollections.observableArrayList(list);
         tableSex.setItems(clients);
 
@@ -78,7 +78,7 @@ public class HelloController {
         colEmail.setCellValueFactory(new PropertyValueFactory<Client, String>("email"));
         tableSex.getColumns().add(colEmail);
 
-    }
+    }*/
 
     private void tableFill(){
 

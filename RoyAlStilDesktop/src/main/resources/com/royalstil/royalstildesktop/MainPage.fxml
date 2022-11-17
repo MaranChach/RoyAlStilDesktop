@@ -3,14 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="471.0" prefWidth="696.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.MainPage">
+<AnchorPane prefHeight="471.0" prefWidth="696.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.MainPage">
    <children>
       <VBox prefHeight="471.0" prefWidth="175.0" styleClass="menuPane" stylesheets="@style.css">
          <children>
@@ -69,12 +68,12 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <AnchorPane layoutX="176.0" prefHeight="471.0" prefWidth="521.0">
+      <AnchorPane layoutX="176.0" prefHeight="471.0" prefWidth="732.0" styleClass="whiteBackground">
          <children>
             <TableView fx:id="mainTable" prefHeight="364.0" prefWidth="526.0" styleClass="mainTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
 
             </TableView>
-            <Label text="Заголовок" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Label fx:id="mainWindowLabel" text="Заголовок" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font>

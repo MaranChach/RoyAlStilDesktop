@@ -47,6 +47,8 @@ public class MainPage{
     //region labelFields
     @FXML
     private Label logoLabel;
+    @FXML
+    private Label mainWindowLabel;
     //endregion
 
     @FXML
@@ -63,6 +65,7 @@ public class MainPage{
     private void onButtonClientsClick(ActionEvent event) throws SQLException, IOException {
         fillTable("SELECT * FROM \"Main\".clients");
         mainTable.setItems(tableData);
+        mainWindowLabel.setText("Клиенты");
     }
     @FXML
     private void onButtonOrdersClick(ActionEvent event){
@@ -97,9 +100,10 @@ public class MainPage{
         receiptsButton.setFont(mainFont);
         writeOffButton.setFont(mainFont);
         logoLabel.setFont(mainFont);
+        mainWindowLabel.setFont(mainFont);
     }
     private void fillTable(String query) throws SQLException, IOException {
-        mainTable.getColumns().removeAll();
+        mainTable.getColumns().clear();
         tableData = FXCollections.observableArrayList();
         Statement statement = connection.Connect().createStatement();
         ResultSet resultSet = statement.executeQuery(query);
@@ -126,6 +130,8 @@ public class MainPage{
             }
             System.out.println("Row [1] added " + row);
             tableData.add(row);
+
+
         }
     }
 
