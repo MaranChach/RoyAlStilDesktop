@@ -1,29 +1,37 @@
 package com.royalstil.royalstildesktop;
 
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class MainPage{
 
     private ConnectionDB connection;
-    private Font mainFont = Font.loadFont(getClass().getResource("InterFont/Inter-Bold.otf").toExternalForm(), 18);
+    private final Font mainFont = Font.loadFont(getClass().getResource("InterFont/Inter-Bold.otf").toExternalForm(), 18);
 
+    private HashMap<String, String> selectedRowMap;
     @FXML
     private TableView<?> mainTable;
     private ObservableList tableData;
@@ -55,6 +63,8 @@ public class MainPage{
     private void initialize(){
         connection = new ConnectionDB();
         setFonts();
+        setListener();
+
     }
 
 
@@ -130,9 +140,60 @@ public class MainPage{
             }
             System.out.println("Row [1] added " + row);
             tableData.add(row);
-
-
         }
+    }
+
+
+    public void getRowData(){
+
+    }
+
+    @FXML
+    private void onMainTableClick(MouseEvent mouseEvent) {
+        var a = mainTable.getSelectionModel().getSelectedItem();
+    }
+
+    private void setListener(){
+        TableView.TableViewSelectionModel selectionModel = mainTable.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object oldVal, Object newVal) {
+                if (newVal != null){
+                    try {
+                        HashMap<String, String> valueMap = new HashMap<>();
+                        ObservableList valueList = (ObservableList) newVal;
+                        for (int i = 0; i < mainTable.getColumns().size(); i++) {
+                            valueMap.put(mainTable.getColumns().get(i).getText(), valueList.get(i).toString());
+                        }
+                        selectedRowMap = valueMap;
+                        openNewClientScene();
+                    }catch (IOException exception){
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    private void openNewClientScene() throws IOException {
+        Stage clientStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientPage.fxml"));
+        Parent root = loader.load();
+        if(selectedRowMap != null){
+            ElementController clientPageController = loader.getController();
+            clientPageController.setSelectedRow(selectedRowMap);
+        }
+        Scene clientScene = new Scene(root);
+        clientStage.setScene(clientScene);
+        clientStage.setResizable(false);
+        clientStage.setTitle("Клиент");
+        clientStage.show();
+    }
+
+    @FXML
+    private void onAddClientClick(ActionEvent actionEvent) throws IOException {
+        selectedRowMap = null;
+        openNewClientScene();
     }
 
 

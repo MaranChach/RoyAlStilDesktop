@@ -8,12 +8,12 @@ import java.util.Date;
 public class Client {
     public SimpleIntegerProperty clid;
     public SimpleStringProperty firstName;
-    private SimpleStringProperty secondName;
-    private SimpleStringProperty login;
-    private SimpleStringProperty password;
-    private SimpleStringProperty phoneNumber;
-    private SimpleStringProperty email;
-    private Date birthDate;
+    private final SimpleStringProperty secondName;
+    private final SimpleStringProperty login;
+    private final SimpleStringProperty password;
+    private final SimpleStringProperty phoneNumber;
+    private final SimpleStringProperty email;
+    private final Date birthDate;
 
     public Client(int id, String firstName, String secondName, String login, String password, String phoneNumber, String email, Date birthDate) {
         this.clid = new SimpleIntegerProperty(id);

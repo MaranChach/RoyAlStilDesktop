@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="471.0" prefWidth="696.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.MainPage">
+<AnchorPane prefHeight="471.0" prefWidth="696.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.MainPage">
    <children>
       <VBox prefHeight="471.0" prefWidth="175.0" styleClass="menuPane" stylesheets="@style.css">
          <children>
@@ -68,9 +68,9 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <AnchorPane layoutX="176.0" prefHeight="471.0" prefWidth="732.0">
+      <AnchorPane layoutX="176.0" prefHeight="471.0" prefWidth="732.0" styleClass="whiteBackground">
          <children>
-            <TableView fx:id="mainTable" prefHeight="364.0" prefWidth="526.0" styleClass="mainTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <TableView fx:id="mainTable" onMouseClicked="#onMainTableClick" prefHeight="364.0" prefWidth="526.0" styleClass="mainTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
 
             </TableView>
             <Label fx:id="mainWindowLabel" text="Заголовок" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -78,7 +78,7 @@
                   <Font name="Segoe UI" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="addButton" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" styleClass="addButton" text="Добавить" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="44.0">
+            <Button fx:id="addButton" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#onAddClientClick" prefHeight="34.0" prefWidth="139.0" styleClass="addButton" text="Добавить" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="44.0">
                <font>
                   <Font size="16.0" />
                </font>

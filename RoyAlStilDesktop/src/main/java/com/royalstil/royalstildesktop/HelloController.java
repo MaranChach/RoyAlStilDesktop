@@ -20,7 +20,7 @@ import java.util.List;
 
 
 public class HelloController {
-    private Font fontInter = new Font(getClass().getResource("InterFont/Inter-V.ttf").toExternalForm(), 18);
+    private final Font fontInter = new Font(getClass().getResource("InterFont/Inter-V.ttf").toExternalForm(), 18);
     @FXML
     private Label welcomeText;
     @FXML
