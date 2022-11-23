@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ConnectionDB {
     private Connection connection = null;
@@ -50,9 +51,12 @@ public class ConnectionDB {
         return connection;
     }
 
-    public static void Disconnect(Connection connection) throws SQLException {
+    public void Disconnect() throws SQLException {
         try{
-            connection.close();
+            if (this.connection != null)
+                connection.close();
+            if (this.statement != null)
+                statement.close();
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -60,6 +64,7 @@ public class ConnectionDB {
     }
 
     public void sendQuery(String query) throws IOException, SQLException {
+        Connect();
         try{
             if (connection == null) {
                 connection = Connect();
@@ -72,14 +77,12 @@ public class ConnectionDB {
             System.out.println("Connection error");
         }
         finally {
-            if (connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
+            Disconnect();
         }
     }
 
     public ResultSet selectQuery(String query) throws IOException, SQLException {
+        Connect();
         ResultSet resultSet = null;
         try{
             if (connection == null){
@@ -94,17 +97,15 @@ public class ConnectionDB {
             System.out.println("Connection error");
         }
         finally {
-            if (connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
+            Disconnect();
         }
         return resultSet;
     }
 
-    /*public ArrayList selectQueryArr(String query) throws IOException, SQLException {
+    public HashMap selectQueryArr(String query) throws IOException, SQLException {
+        Connect();
         ResultSet resultSet = null;
-        ArrayList<Client> result = new ArrayList<Client>();
+        HashMap result = new HashMap<String, String>();
         try {
             if (connection == null) {
                 connection = Connect();
@@ -112,8 +113,12 @@ public class ConnectionDB {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
 
+
+
             while (resultSet.next()){
-                result.add(new Client(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getDate(8)));
+                for (int i = 0; i < resultSet.getMetaData().getColumnCount(); i++) {
+                    result.put(resultSet.getMetaData().getColumnName(i), resultSet.getString(i));
+                }
             }
 
             return result;
@@ -121,11 +126,33 @@ public class ConnectionDB {
             e.printStackTrace();
             System.out.println("Connection error");
         } finally {
-            if (connection != null)
-                connection.close();
-            if (statement != null)
-                statement.close();
+            Disconnect();
         }
         return result;
-    }*/
+    }
+
+    public int sendQueryWithId(String query) throws IOException, SQLException {
+        Connect();
+        ResultSet resultSet = null;
+        try {
+            if (connection == null) {
+                connection = Connect();
+            }
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+
+
+
+            while (resultSet.next()){
+                return resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Connection error");
+        } finally {
+            Disconnect();
+        }
+        return 0;
+    }
 }

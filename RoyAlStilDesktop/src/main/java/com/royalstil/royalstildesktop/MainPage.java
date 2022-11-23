@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,8 +30,9 @@ import java.util.List;
 public class MainPage{
 
     private ConnectionDB connection;
-    private final Font mainFont = Font.loadFont(getClass().getResource("InterFont/Inter-Bold.otf").toExternalForm(), 18);
+    private final Font mainFont = Font.loadFont(getClass().getResource("InterFont/Inter-Regular.otf").toExternalForm(), 20);
 
+    private Menus openedMenu;
     private HashMap<String, String> selectedRowMap;
     @FXML
     private TableView<?> mainTable;
@@ -64,32 +66,30 @@ public class MainPage{
         connection = new ConnectionDB();
         setFonts();
         setListener();
-
     }
-
-
-
 
     //region OnMenuButtonsClickEvents
     @FXML
     private void onButtonClientsClick(ActionEvent event) throws SQLException, IOException {
-        fillTable("SELECT * FROM \"Main\".clients");
-        mainTable.setItems(tableData);
-        mainWindowLabel.setText("Клиенты");
+        fillTable(mainTable, "SELECT * FROM \"Main\".clients");
+        openedMenu = Menus.Clients;
+        addButton.setDisable(false);
     }
     @FXML
     private void onButtonOrdersClick(ActionEvent event){
 
     }
     @FXML
-    private void onButtonGoodsClick(ActionEvent event){
-
+    private void onButtonGoodsClick(ActionEvent event) throws SQLException, IOException {
+        fillTable(mainTable, "SELECT * FROM \"Main\".goods");
+        openedMenu = Menus.Goods;
+        addButton.setDisable(false);
     }
     @FXML
     private void onButtonProvidersClick(ActionEvent event){
 
     }
-    @FXML
+      @FXML
     private void onButtonReceiptsClick(ActionEvent event){
 
     }
@@ -100,25 +100,13 @@ public class MainPage{
     //endregion
 
 
-    @FXML
-    private void setFonts(){
-        addButton.setFont(mainFont);
-        clientsButton.setFont(mainFont);
-        goodsButton.setFont(mainFont);
-        ordersButton.setFont(mainFont);
-        providersButton.setFont(mainFont);
-        receiptsButton.setFont(mainFont);
-        writeOffButton.setFont(mainFont);
-        logoLabel.setFont(mainFont);
-        mainWindowLabel.setFont(mainFont);
-    }
-    private void fillTable(String query) throws SQLException, IOException {
+    private void fillTable(TableView tableView, String query) throws SQLException, IOException {
         mainTable.getColumns().clear();
+        mainTable.getItems().clear();
         tableData = FXCollections.observableArrayList();
         Statement statement = connection.Connect().createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         for (int i = 0; i < resultSet.getMetaData().getColumnCount(); i++) {
-            //We are using non property style for making dynamic table
             final int j = i;
             TableColumn col = new TableColumn(resultSet.getMetaData().getColumnName(i + 1));
             col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
@@ -129,23 +117,16 @@ public class MainPage{
             });
 
             mainTable.getColumns().addAll(col);
-            System.out.println("Column [" + i + "] ");
         }
 
         while(resultSet.next()){
             ObservableList<String> row = FXCollections.observableArrayList();
             for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
-                //Iterate Column
                 row.add(resultSet.getString(i));
             }
-            System.out.println("Row [1] added " + row);
             tableData.add(row);
         }
-    }
-
-
-    public void getRowData(){
-
+        tableView.setItems(tableData);
     }
 
     @FXML
@@ -166,7 +147,7 @@ public class MainPage{
                             valueMap.put(mainTable.getColumns().get(i).getText(), valueList.get(i).toString());
                         }
                         selectedRowMap = valueMap;
-                        openNewClientScene();
+                        openNewScene(valueMap);
                     }catch (IOException exception){
                         exception.printStackTrace();
                     }
@@ -175,14 +156,23 @@ public class MainPage{
         });
     }
 
-    private void openNewClientScene() throws IOException {
+    private void openNewScene(HashMap<String, String> valueMap) throws IOException {
         Stage clientStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getSceneFile());
         Parent root = loader.load();
-        if(selectedRowMap != null){
-            ElementController clientPageController = loader.getController();
-            clientPageController.setSelectedRow(selectedRowMap);
-        }
+        ElementController clientPageController = loader.getController();
+        clientPageController.setSelectedRow(valueMap);
+        Scene clientScene = new Scene(root);
+        clientStage.setScene(clientScene);
+        clientStage.setResizable(false);
+        clientStage.setTitle("Клиент");
+        clientStage.show();
+    }
+
+    private void openNewScene() throws IOException {
+        Stage clientStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getSceneFile());
+        Parent root = loader.load();
         Scene clientScene = new Scene(root);
         clientStage.setScene(clientScene);
         clientStage.setResizable(false);
@@ -191,12 +181,30 @@ public class MainPage{
     }
 
     @FXML
-    private void onAddClientClick(ActionEvent actionEvent) throws IOException {
-        selectedRowMap = null;
-        openNewClientScene();
+    private void onAddButtonClick(ActionEvent actionEvent) throws IOException {
+        openNewScene();
     }
 
+    private URL getSceneFile(){
+        switch (openedMenu){
+            case Clients : return getClass().getResource("ClientPage.fxml");
+            case Goods : return getClass().getResource("GoodsPage.fxml");
+            default : return null;
+        }
+    }
 
+    @FXML
+    private void setFonts(){
+        addButton.setFont(mainFont);
+        clientsButton.setFont(mainFont);
+        goodsButton.setFont(mainFont);
+        ordersButton.setFont(mainFont);
+        providersButton.setFont(mainFont);
+        receiptsButton.setFont(mainFont);
+        writeOffButton.setFont(mainFont);
+        logoLabel.setFont(mainFont);
+        mainWindowLabel.setFont(mainFont);
+    }
     /*private void reOpenTable(TableView newTable){
         if(openedTable != null){
             openedTable.setVisible(false);

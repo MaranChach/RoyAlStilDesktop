@@ -35,10 +35,25 @@
     -fx-background-color: rgb(4, 133, 0);
 }
 
+.deleteButton{
+    -fx-background-color: rgb(255, 0, 0);
+    -fx-background-radius: 30;
+}
+
+.deleteButton:hover{
+    -fx-background-color: rgb(220, 0, 0);
+    -fx-background-radius: 30;
+}
+
 .searchField{
     -fx-background-radius: 30;
 }
 
 .tableColumn{
     -fx-background-radius: 30;
+}
+
+.notification{
+    -fx-background-color: grey;
+    -fx-background-radius: 10;
 }
