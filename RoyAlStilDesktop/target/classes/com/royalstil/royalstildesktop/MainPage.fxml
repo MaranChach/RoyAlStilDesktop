@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="471.0" prefWidth="696.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.MainPage">
+<AnchorPane prefHeight="471.0" prefWidth="696.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.MainPage">
    <children>
       <VBox prefHeight="471.0" prefWidth="175.0" styleClass="menuPane" stylesheets="@style.css">
          <children>
@@ -79,7 +83,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <TextField layoutX="290.0" layoutY="44.0" prefHeight="34.0" prefWidth="158.0" promptText="Поиск" styleClass="searchField" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="44.0" />
+            <TextField fx:id="searchField" layoutX="290.0" layoutY="44.0" onAction="#onSearch" prefHeight="34.0" prefWidth="158.0" promptText="Поиск" styleClass="searchField" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="44.0" />
          </children>
       </AnchorPane>
    </children>

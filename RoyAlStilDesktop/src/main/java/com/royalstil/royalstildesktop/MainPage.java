@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,14 +21,17 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
 public class MainPage{
+
 
     private ConnectionDB connection;
     private final Font mainFont = Font.loadFont(getClass().getResource("InterFont/Inter-Regular.otf").toExternalForm(), 20);
@@ -37,6 +41,9 @@ public class MainPage{
     @FXML
     private TableView<?> mainTable;
     private ObservableList tableData;
+
+    @FXML
+    private TextField searchField;
 
     //region buttonFields
     @FXML
@@ -71,7 +78,7 @@ public class MainPage{
     //region OnMenuButtonsClickEvents
     @FXML
     private void onButtonClientsClick(ActionEvent event) throws SQLException, IOException {
-        fillTable(mainTable, "SELECT * FROM \"Main\".clients");
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT * FROM \"Main\".clients");
         openedMenu = Menus.Clients;
         addButton.setDisable(false);
     }
@@ -81,7 +88,8 @@ public class MainPage{
     }
     @FXML
     private void onButtonGoodsClick(ActionEvent event) throws SQLException, IOException {
-        fillTable(mainTable, "SELECT * FROM \"Main\".goods");
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_goods, name, remind, cost, used, name_goods_type FROM \"Main\".goods " +
+                "INNER JOIN \"Main\".goods_type on id_goods_type = goods_type_id");
         openedMenu = Menus.Goods;
         addButton.setDisable(false);
     }
@@ -98,36 +106,6 @@ public class MainPage{
 
     }
     //endregion
-
-
-    private void fillTable(TableView tableView, String query) throws SQLException, IOException {
-        mainTable.getColumns().clear();
-        mainTable.getItems().clear();
-        tableData = FXCollections.observableArrayList();
-        Statement statement = connection.Connect().createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
-        for (int i = 0; i < resultSet.getMetaData().getColumnCount(); i++) {
-            final int j = i;
-            TableColumn col = new TableColumn(resultSet.getMetaData().getColumnName(i + 1));
-            col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
-                @Override
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
-                    return new SimpleStringProperty(param.getValue().get(j).toString());
-                }
-            });
-
-            mainTable.getColumns().addAll(col);
-        }
-
-        while(resultSet.next()){
-            ObservableList<String> row = FXCollections.observableArrayList();
-            for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
-                row.add(resultSet.getString(i));
-            }
-            tableData.add(row);
-        }
-        tableView.setItems(tableData);
-    }
 
     @FXML
     private void onMainTableClick(MouseEvent mouseEvent) {
@@ -157,27 +135,26 @@ public class MainPage{
     }
 
     private void openNewScene(HashMap<String, String> valueMap) throws IOException {
-        Stage clientStage = new Stage();
+        Stage newStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getSceneFile());
         Parent root = loader.load();
-        ElementController clientPageController = loader.getController();
-        clientPageController.setSelectedRow(valueMap);
-        Scene clientScene = new Scene(root);
-        clientStage.setScene(clientScene);
-        clientStage.setResizable(false);
-        clientStage.setTitle("Клиент");
-        clientStage.show();
+        ElementController newPageController = loader.getController();
+        newPageController.setSelectedRow(valueMap);
+        Scene newScene = new Scene(root);
+        newStage.setScene(newScene);
+        newStage.setResizable(false);
+        newStage.setTitle("Клиент");
+        newStage.show();
     }
 
     private void openNewScene() throws IOException {
-        Stage clientStage = new Stage();
+        Stage newStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getSceneFile());
         Parent root = loader.load();
-        Scene clientScene = new Scene(root);
-        clientStage.setScene(clientScene);
-        clientStage.setResizable(false);
-        clientStage.setTitle("Клиент");
-        clientStage.show();
+        Scene newScene = new Scene(root);
+        newStage.setScene(newScene);
+        newStage.setResizable(false);
+        newStage.show();
     }
 
     @FXML
@@ -205,6 +182,42 @@ public class MainPage{
         logoLabel.setFont(mainFont);
         mainWindowLabel.setFont(mainFont);
     }
+
+    public void onSearch(ActionEvent event) {
+    }
+
+    //region garbage
+    /*
+    private void fillTable(TableView tableView, String query) throws SQLException, IOException {
+        mainTable.getColumns().clear();
+        mainTable.getItems().clear();
+        tableData = FXCollections.observableArrayList();
+        Statement statement = connection.Connect().createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        for (int i = 0; i < resultSet.getMetaData().getColumnCount(); i++) {
+            final int j = i;
+            TableColumn col = new TableColumn(resultSet.getMetaData().getColumnName(i + 1));
+            col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
+                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                }
+            });
+
+            mainTable.getColumns().addAll(col);
+        }
+
+        while(resultSet.next()){
+            ObservableList<String> row = FXCollections.observableArrayList();
+            for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
+                row.add(resultSet.getString(i));
+            }
+            tableData.add(row);
+        }
+        tableView.setItems(tableData);
+    }
+    */
+
     /*private void reOpenTable(TableView newTable){
         if(openedTable != null){
             openedTable.setVisible(false);
@@ -212,5 +225,6 @@ public class MainPage{
         openedTable = newTable;
         openedTable.setVisible(true);
     }*/
+    //endregion
 
 }

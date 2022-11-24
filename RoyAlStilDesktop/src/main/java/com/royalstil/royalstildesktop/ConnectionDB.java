@@ -4,7 +4,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -154,5 +156,55 @@ public class ConnectionDB {
             Disconnect();
         }
         return 0;
+    }
+
+    public HashMap<String, String> sendQueryGoodsTypeHashMap() throws SQLException, IOException {
+        HashMap<String, String> hashMap = new HashMap();
+        try {
+            Connect();
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM \"Main\".goods_type");
+
+            while (resultSet.next()){
+                hashMap.put(resultSet.getString(2), resultSet.getString(1));
+            }
+            return hashMap;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            Disconnect();
+        }
+        return hashMap;
+    }
+
+    public static ObservableList fillTable(TableView tableView, String query) throws SQLException, IOException {
+        tableView.getColumns().clear();
+        tableView.getItems().clear();
+        ObservableList tableData = FXCollections.observableArrayList();
+        Statement statement = new ConnectionDB().Connect().createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        for (int i = 0; i < resultSet.getMetaData().getColumnCount(); i++) {
+            final int j = i;
+            TableColumn col = new TableColumn(resultSet.getMetaData().getColumnName(i + 1));
+            col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
+                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                }
+            });
+
+            tableView.getColumns().addAll(col);
+        }
+
+        while(resultSet.next()){
+            ObservableList<String> row = FXCollections.observableArrayList();
+            for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
+                row.add(resultSet.getString(i));
+            }
+            tableData.add(row);
+        }
+        tableView.setItems(tableData);
+        return tableData;
     }
 }

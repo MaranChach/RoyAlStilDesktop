@@ -2,6 +2,7 @@ package com.royalstil.royalstildesktop;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -20,7 +21,6 @@ public class ClientPageController extends ElementController{
 
     //region fields
 
-    private int id;
 
     private ConnectionDB connection;
 
@@ -104,7 +104,7 @@ public class ClientPageController extends ElementController{
 
         id = connection.sendQueryWithId(query);
         idLabel.setText("Клиент № " + id);
-        newNotification();
+        newNotification(notificationPane);
     }
 
 
@@ -112,7 +112,7 @@ public class ClientPageController extends ElementController{
         connection.sendQuery("DELETE FROM \"Main\".clients WHERE " +
                 "id_client = " +
                 id);
-        newNotification();
+        newNotification(notificationPane);
         firstNameField.getScene().getWindow().hide();
     }
 
@@ -137,26 +137,6 @@ public class ClientPageController extends ElementController{
                 id +
                 "RETURNING id_client";
         connection.sendQuery(query);
-        newNotification();
+        newNotification(notificationPane);
     }
-
-    private void newNotification(){
-        Timer timer = new Timer("notificationTime");
-        notificationPane.setVisible(true);
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                notificationPane.setVisible(false);
-            }
-        }, 3000);
-        /*AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setOpacity(0.7d);
-        anchorPane.setPrefSize(237, 65);
-        anchorPane.setStyle("-fx-background-color: grey; -fx-background-radius: 10;");
-        AnchorPane.setBottomAnchor(anchorPane, 10d);
-        AnchorPane.setRightAnchor(anchorPane, 10d);
-        anchorPane.getChildren().add(new Label());*/
-    }
-
-
 }
