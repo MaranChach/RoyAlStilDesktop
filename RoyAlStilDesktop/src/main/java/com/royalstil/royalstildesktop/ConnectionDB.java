@@ -158,14 +158,18 @@ public class ConnectionDB {
         return 0;
     }
 
-    public HashMap<String, String> sendQueryGoodsTypeHashMap() throws SQLException, IOException {
+    public HashMap<String, String> sendQueryGoodsTypeHashMap(String query) throws SQLException, IOException {
         HashMap<String, String> hashMap = new HashMap();
         try {
             Connect();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM \"Main\".goods_type");
+            ResultSet resultSet = connection.createStatement().executeQuery(query);
 
             while (resultSet.next()){
-                hashMap.put(resultSet.getString(2), resultSet.getString(1));
+                String data = "";
+                for (int i = 2; i <= resultSet.getMetaData().getColumnCount(); i++) {
+                    data += resultSet.getString(i) + " ";
+                }
+                hashMap.put(data, resultSet.getString(1));
             }
             return hashMap;
         }

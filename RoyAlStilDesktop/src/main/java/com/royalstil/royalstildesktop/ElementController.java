@@ -8,11 +8,16 @@ import java.util.TimerTask;
 
 public class ElementController {
     protected int id;
+    protected boolean editable = false;
 
     protected HashMap<String, String> selectedRow;
 
     public void setSelectedRow(HashMap<String, String> selectedRow){
         this.selectedRow = selectedRow;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
     protected static void newNotification(Node notificationNode){

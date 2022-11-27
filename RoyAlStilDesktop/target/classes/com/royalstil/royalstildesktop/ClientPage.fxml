@@ -45,7 +45,7 @@
          </font>
       </Label>
       <Button fx:id="saveButton" layoutX="512.0" layoutY="15.0" mnemonicParsing="false" onAction="#onAddButtonClick" styleClass="addButton" text="Добавить" textFill="WHITE" />
-      <Button fx:id="deleteButton" layoutX="353.0" layoutY="15.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" styleClass="deleteButton" text="Удалить" textFill="WHITE" />
+      <Button fx:id="deleteButton" disable="true" layoutX="353.0" layoutY="15.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" styleClass="deleteButton" text="Удалить" textFill="WHITE" />
       <AnchorPane fx:id="notificationPane" opacity="0.71" prefHeight="65.0" prefWidth="237.0" styleClass="notification" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutY="6.0" prefHeight="54.0" prefWidth="241.0" text="Изменения сохранены" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
@@ -55,6 +55,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="updateButton" layoutX="426.0" layoutY="15.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" styleClass="addButton" text="Сохранить" textFill="WHITE" />
+      <Button fx:id="updateButton" disable="true" layoutX="426.0" layoutY="15.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" styleClass="addButton" text="Сохранить" textFill="WHITE" />
    </children>
 </AnchorPane>

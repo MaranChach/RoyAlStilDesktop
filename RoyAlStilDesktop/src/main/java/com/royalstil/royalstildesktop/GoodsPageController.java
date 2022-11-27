@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GoodsPage extends ElementController{
+public class GoodsPageController extends ElementController{
 
 
     //region fields
@@ -71,21 +70,26 @@ public class GoodsPage extends ElementController{
 
     @FXML
     private void initialize() throws SQLException, IOException {
-        goodsTypeMap = connection.sendQueryGoodsTypeHashMap();
+        goodsTypeMap = connection.sendQueryGoodsTypeHashMap("SELECT * FROM \"Main\".goods_type");
         List list = new ArrayList(goodsTypeMap.keySet());
         goodsTypeComboBox.setItems(FXCollections.observableArrayList(list));
-        goodsTypeComboBox.getSelectionModel().select(1);
+
     }
+
+
 
     @Override
     public void setSelectedRow(HashMap<String, String> selectedRow){
         id = Integer.parseInt(selectedRow.get("id_goods"));
+        deleteButton.setDisable(false);
+        updateButton.setDisable(false);
         nameField.setText(selectedRow.get("name"));
         costField.setText(selectedRow.get("cost"));
         remainsField.setText(selectedRow.get("remind"));
         if(selectedRow.get("used").equals("t"))
             usedCheckBox.setSelected(true);
 
+        goodsTypeComboBox.getSelectionModel().selectFirst();
         for (int i = 0; i < goodsTypeComboBox.getItems().size(); i++) {
             if (goodsTypeComboBox.getValue().equals(selectedRow.get("name_goods_type")))
                 break;
@@ -113,6 +117,8 @@ public class GoodsPage extends ElementController{
 
     @FXML
     private void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
+        if(!editable)
+            return;
         connection.sendQuery("DELETE FROM \"Main\".goods WHERE id_goods = " + id);
         costField.getScene().getWindow().hide();
         newNotification(notificationPane);
@@ -120,6 +126,8 @@ public class GoodsPage extends ElementController{
 
     @FXML
     private void onUpdateButtonClick(ActionEvent event) throws SQLException, IOException {
+        if (!editable)
+            return;
         connection.sendQueryWithId("UPDATE \"Main\".goods SET" +
                 " name = '" +
                 nameField.getText() +

@@ -26,6 +26,11 @@
     -fx-border-radius: 10;
 }
 
+.registrationPane{
+    -fx-background-radius: 30;
+    -fx-background-color: rgb(235, 235, 235);
+}
+
 .addButton{
     -fx-background-color: rgb(4, 191, 0);
     -fx-background-radius: 30;

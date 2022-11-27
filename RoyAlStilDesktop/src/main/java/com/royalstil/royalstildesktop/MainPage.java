@@ -78,13 +78,15 @@ public class MainPage{
     //region OnMenuButtonsClickEvents
     @FXML
     private void onButtonClientsClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT * FROM \"Main\".clients");
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_client, second_name, first_name, phone_number, email, birth_date FROM \"Main\".clients");
         openedMenu = Menus.Clients;
         addButton.setDisable(false);
     }
     @FXML
-    private void onButtonOrdersClick(ActionEvent event){
-
+    private void onButtonOrdersClick(ActionEvent event) throws SQLException, IOException {
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_order, second_name, first_name, email, date FROM \"Main\".orders INNER JOIN \"Main\".clients ON client = id_client");
+        openedMenu = Menus.Orders;
+        addButton.setDisable(false);
     }
     @FXML
     private void onButtonGoodsClick(ActionEvent event) throws SQLException, IOException {
@@ -140,10 +142,10 @@ public class MainPage{
         Parent root = loader.load();
         ElementController newPageController = loader.getController();
         newPageController.setSelectedRow(valueMap);
+        newPageController.setEditable(true);
         Scene newScene = new Scene(root);
         newStage.setScene(newScene);
         newStage.setResizable(false);
-        newStage.setTitle("Клиент");
         newStage.show();
     }
 
@@ -166,6 +168,7 @@ public class MainPage{
         switch (openedMenu){
             case Clients : return getClass().getResource("ClientPage.fxml");
             case Goods : return getClass().getResource("GoodsPage.fxml");
+            case Orders : return getClass().getResource("OrdersPage.fxml");
             default : return null;
         }
     }

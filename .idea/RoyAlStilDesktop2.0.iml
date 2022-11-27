@@ -3,6 +3,6 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="postgresql-42.5.0" level="project" />
+    <orderEntry type="library" name="javax.mail" level="project" />
   </component>
 </module>

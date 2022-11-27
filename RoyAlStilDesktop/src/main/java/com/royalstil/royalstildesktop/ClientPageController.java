@@ -69,6 +69,8 @@ public class ClientPageController extends ElementController{
     @Override
     public void setSelectedRow(HashMap<String, String> selectedRow){
         this.selectedRow = selectedRow;
+        updateButton.setDisable(false);
+        deleteButton.setDisable(false);
         secondNameField.setText(selectedRow.get("second_name"));
         firstNameField.setText(selectedRow.get("first_name"));
         birthdayField.setText(selectedRow.get("birth_date"));
