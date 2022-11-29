@@ -70,7 +70,7 @@ public class GoodsPageController extends ElementController{
 
     @FXML
     private void initialize() throws SQLException, IOException {
-        goodsTypeMap = connection.sendQueryGoodsTypeHashMap("SELECT * FROM \"Main\".goods_type");
+        goodsTypeMap = connection.sendQueryHashMap("SELECT * FROM \"Main\".goods_type");
         List list = new ArrayList(goodsTypeMap.keySet());
         goodsTypeComboBox.setItems(FXCollections.observableArrayList(list));
 

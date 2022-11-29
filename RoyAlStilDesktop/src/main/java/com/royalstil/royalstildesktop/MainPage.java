@@ -84,7 +84,7 @@ public class MainPage{
     }
     @FXML
     private void onButtonOrdersClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_order, second_name, first_name, email, date FROM \"Main\".orders INNER JOIN \"Main\".clients ON client = id_client");
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_order, passed, second_name, first_name, email, date FROM \"Main\".orders INNER JOIN \"Main\".clients ON client = id_client");
         openedMenu = Menus.Orders;
         addButton.setDisable(false);
     }
@@ -100,8 +100,10 @@ public class MainPage{
 
     }
       @FXML
-    private void onButtonReceiptsClick(ActionEvent event){
-
+    private void onButtonReceiptsClick(ActionEvent event) throws SQLException, IOException {
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_receipt_of_goods, passed, name, date FROM \"Main\".receipt_of_goods INNER JOIN \"Main\".provider ON provider = id_provider");
+        openedMenu = Menus.Receipts;
+        addButton.setDisable(false);
     }
     @FXML
     private void onButtonWriteOffClick(ActionEvent event){
@@ -169,6 +171,7 @@ public class MainPage{
             case Clients : return getClass().getResource("ClientPage.fxml");
             case Goods : return getClass().getResource("GoodsPage.fxml");
             case Orders : return getClass().getResource("OrdersPage.fxml");
+            case Receipts : return getClass().getResource("ReceiptsPage.fxml");
             default : return null;
         }
     }
@@ -188,6 +191,17 @@ public class MainPage{
 
     public void onSearch(ActionEvent event) {
     }
+
+    //region notes
+    /*
+    provider insert = INSERT INTO "Main".provider (name, inn) VALUES ('ООО КрутоеПредприятие', '123123123123')
+
+     */
+    //endregion
+
+
+
+
 
     //region garbage
     /*

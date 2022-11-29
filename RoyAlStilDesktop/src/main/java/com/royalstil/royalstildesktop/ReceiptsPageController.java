@@ -18,18 +18,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class OrdersPageController extends ElementController {
+public class ReceiptsPageController extends ElementController {
+
+
 
     //region fields
 
     private ConnectionDB connectionDB = new ConnectionDB();
 
-    private HashMap<String, String> clientsMap;
+    private HashMap<String, String> providerMap;
 
     private boolean passed;
-
-    @FXML
-    private CheckBox passedCheckBox;
 
     @FXML
     private Button passButton;
@@ -38,7 +37,10 @@ public class OrdersPageController extends ElementController {
     private Button addToOrderButton;
 
     @FXML
-    private ComboBox<?> clientComboBox;
+    private CheckBox passedCheckBox;
+
+    @FXML
+    private ComboBox<?> providerComboBox;
 
     @FXML
     private Button deleteButton;
@@ -68,10 +70,9 @@ public class OrdersPageController extends ElementController {
 
     @FXML
     private void initialize() throws SQLException, IOException {
-        clientsMap = connectionDB.sendQueryHashMap("SELECT id_client, second_name, first_name, email FROM \"Main\".clients");
-        List list = new ArrayList<>(clientsMap.keySet());
-        clientComboBox.setItems(FXCollections.observableArrayList(list));
-
+        providerMap = connectionDB.sendQueryHashMap("SELECT id_provider, name, inn FROM \"Main\".provider");
+        List list = new ArrayList(providerMap.keySet());
+        providerComboBox.setItems(FXCollections.observableArrayList(list));
         setGoodsTable(goodsOnOrderTable);
     }
 
@@ -84,20 +85,20 @@ public class OrdersPageController extends ElementController {
         updateButton.setDisable(passed);
         passButton.setDisable(passed);
         addToOrderButton.setDisable(passed);
-        id = Integer.parseInt(selectedRow.get("id_order"));
+        id = Integer.parseInt(selectedRow.get("id_receipt_of_goods"));
         idLabel.setText(idLabel.getText() + " № " + id);
         orderDatePicker.setValue(LocalDate.parse(selectedRow.get("date")));
-        clientComboBox.getSelectionModel().selectFirst();
-        for (int i = 0; i < clientComboBox.getItems().size(); i++) {
-            if(clientComboBox.getValue().equals(selectedRow.get("second_name") +" "+ selectedRow.get("first_name") +" "+ selectedRow.get("email") +" "))
+        providerComboBox.getSelectionModel().selectFirst();
+        for (int i = 0; i < providerComboBox.getItems().size(); i++) {
+            if(providerComboBox.getValue().equals(selectedRow.get("name") +" "+ selectedRow.get("inn") + " "))
                 break;
-            clientComboBox.getSelectionModel().selectNext();
+            providerComboBox.getSelectionModel().selectNext();
         }
 
         try {
             Statement statement = connectionDB.Connect().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT goods_id, name, cost, number FROM \"Main\".shopping_cart " +
-                    "INNER JOIN \"Main\".goods ON goods_id = id_goods WHERE order_id = " + id);
+            ResultSet resultSet = statement.executeQuery("SELECT goods_id, name, cost, number FROM \"Main\".receipt_of_goods_cart " +
+                    "INNER JOIN \"Main\".goods ON goods_id = id_goods WHERE receipt_of_goods_id = " + id);
 
             while (resultSet.next()){
                 goodsOnOrderTable.getItems().add(new SelectedGoods(resultSet.getInt("goods_id"), resultSet.getString("name"), resultSet.getInt("number"), resultSet.getDouble("cost")));
@@ -128,45 +129,49 @@ public class OrdersPageController extends ElementController {
 
     @FXML
     private void onAddButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
-        id = connectionDB.sendQueryWithId("insert into \"Main\".orders (client, date)" +
+        id = connectionDB.sendQueryWithId("insert into \"Main\".receipt_of_goods (provider, date)" +
                 "values ('" +
-                clientsMap.get(clientComboBox.getValue()) +
+                providerMap.get(providerComboBox.getValue()) +
                 "', '" +
                 orderDatePicker.getValue().toString() +
                 "') " +
-                "RETURNING id_order");
+                "RETURNING id_receipt_of_goods");
         addGoodsInCart();
-        idLabel.setText("Заказ № " + id);
+        idLabel.setText("Поступление № " + id);
         newNotification(notificationPane);
+        passButton.setDisable(false);
+        updateButton.setDisable(false);
+        deleteButton.setDisable(false);
+        saveButton.setDisable(true);
     }
 
     @FXML
     private void onDeleteButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
-        connectionDB.sendQuery("DELETE FROM \"Main\".shopping_cart WHERE order_id = " + id);
-        connectionDB.sendQuery("DELETE FROM \"Main\".orders WHERE id_order = " + id);
+        connectionDB.sendQuery("DELETE FROM \"Main\".receipt_of_goods_cart WHERE receipt_of_goods_id = " + id);
+        connectionDB.sendQuery("DELETE FROM \"Main\".receipt_of_goods WHERE id_receipt_of_goods = " + id);
         idLabel.getScene().getWindow().hide();
     }
 
     @FXML
     private void onUpdateButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
-        connectionDB.sendQueryWithId("UPDATE \"Main\".orders SET" +
+        connectionDB.sendQueryWithId("UPDATE \"Main\".receipt_of_goods SET" +
                 " date = '" +
                 orderDatePicker.getValue() +
-                "', client = " +
+                "', provider = " +
                 "'" +
-                clientsMap.get(clientComboBox.getValue()) +
+                providerMap.get(providerComboBox.getValue()) +
                 "'" +
-                "WHERE id_order = " +
+                "WHERE id_receipt_of_goods = " +
                 id +
-                "RETURNING id_order");
-        connectionDB.sendQuery("DELETE FROM \"Main\".shopping_cart WHERE order_id = " + id);
+                "RETURNING id_receipt_of_goods");
+        connectionDB.sendQuery("DELETE FROM \"Main\".receipt_of_goods_cart WHERE receipt_of_goods_id = " + id);
         addGoodsInCart();
         newNotification(notificationPane);
     }
 
     private void addGoodsInCart() throws SQLException, IOException {
         for (int i = 0; i < goodsOnOrderTable.getItems().size(); i++) {
-            connectionDB.sendQuery("INSERT INTO \"Main\".shopping_cart (order_id, goods_id, number)" +
+            connectionDB.sendQuery("INSERT INTO \"Main\".receipt_of_goods_cart (receipt_of_goods_id, goods_id, number)" +
                     "values (" +
                     id +
                     ", '" +
@@ -174,23 +179,19 @@ public class OrdersPageController extends ElementController {
                     "', " +
                     goodsOnOrderTable.getItems().get(i).getNumber() +
                     ")" +
-                    "RETURNING order_id");
+                    "RETURNING receipt_of_goods_id");
         }
-        passButton.setDisable(false);
-        updateButton.setDisable(false);
-        deleteButton.setDisable(false);
-        saveButton.setDisable(true);
     }
 
     public void onPassButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
-        connectionDB.sendQuery("UPDATE \"Main\".orders SET" +
+        connectionDB.sendQuery("UPDATE \"Main\".receipt_of_goods SET" +
                 " passed = true " +
-                "WHERE id_order = " +
+                "WHERE id_receipt_of_goods = " +
                 id);
 
         for (int i = 0; i < goodsOnOrderTable.getItems().size(); i++) {
             connectionDB.sendQuery("UPDATE \"Main\".goods SET" +
-                    " remind = remind - " +
+                    " remind = remind + " +
                     goodsOnOrderTable.getItems().get(i).getNumber() +
                     " WHERE id_goods = " + goodsOnOrderTable.getItems().get(i).getId());
         }
@@ -199,7 +200,7 @@ public class OrdersPageController extends ElementController {
         passedCheckBox.getScene().getWindow().hide();
     }
 
-    public void onDeleteFromOrderButtonClick(ActionEvent actionEvent) {
+    public void onDeleteFromReceiptButtonClick(ActionEvent actionEvent) {
         SelectionModel<SelectedGoods> selectionModel = goodsOnOrderTable.getSelectionModel();
         SelectedGoods selectedItem = selectionModel.getSelectedItem();
         goodsOnOrderTable.getItems().remove(selectedItem);

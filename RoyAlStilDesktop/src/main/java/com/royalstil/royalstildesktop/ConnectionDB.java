@@ -4,16 +4,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ConnectionDB {
@@ -158,7 +155,7 @@ public class ConnectionDB {
         return 0;
     }
 
-    public HashMap<String, String> sendQueryGoodsTypeHashMap(String query) throws SQLException, IOException {
+    public HashMap<String, String> sendQueryHashMap(String query) throws SQLException, IOException {
         HashMap<String, String> hashMap = new HashMap();
         try {
             Connect();
@@ -211,4 +208,6 @@ public class ConnectionDB {
         tableView.setItems(tableData);
         return tableData;
     }
+
+
 }

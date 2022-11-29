@@ -3,5 +3,6 @@ package com.royalstil.royalstildesktop;
 public enum Menus {
     Clients,
     Orders,
-    Goods
+    Goods,
+    Receipts
 }
