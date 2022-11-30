@@ -81,12 +81,24 @@ public class MainPage{
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_client, second_name, first_name, phone_number, email, birth_date FROM \"Main\".clients");
         openedMenu = Menus.Clients;
         addButton.setDisable(false);
+        mainTable.getColumns().get(0).setText("ID");
+        mainTable.getColumns().get(1).setText("Фамилия");
+        mainTable.getColumns().get(2).setText("Имя");
+        mainTable.getColumns().get(3).setText("Номер телефона");
+        mainTable.getColumns().get(4).setText("Почта");
+        mainTable.getColumns().get(5).setText("Дата рождения");
     }
     @FXML
     private void onButtonOrdersClick(ActionEvent event) throws SQLException, IOException {
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_order, passed, second_name, first_name, email, date FROM \"Main\".orders INNER JOIN \"Main\".clients ON client = id_client");
         openedMenu = Menus.Orders;
         addButton.setDisable(false);
+        mainTable.getColumns().get(0).setText("ID");
+        mainTable.getColumns().get(1).setText("Проведён");
+        mainTable.getColumns().get(2).setText("Фамилия");
+        mainTable.getColumns().get(3).setText("Имя");
+        mainTable.getColumns().get(4).setText("Почта");
+        mainTable.getColumns().get(5).setText("Дата");
     }
     @FXML
     private void onButtonGoodsClick(ActionEvent event) throws SQLException, IOException {
@@ -94,6 +106,12 @@ public class MainPage{
                 "INNER JOIN \"Main\".goods_type on id_goods_type = goods_type_id");
         openedMenu = Menus.Goods;
         addButton.setDisable(false);
+        mainTable.getColumns().get(0).setText("ID");
+        mainTable.getColumns().get(1).setText("Наименование");
+        mainTable.getColumns().get(2).setText("Остаток");
+        mainTable.getColumns().get(3).setText("Цена");
+        mainTable.getColumns().get(4).setText("Б/У");
+        mainTable.getColumns().get(5).setText("Тип");
     }
     @FXML
     private void onButtonProvidersClick(ActionEvent event){
@@ -104,6 +122,10 @@ public class MainPage{
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_receipt_of_goods, passed, name, date FROM \"Main\".receipt_of_goods INNER JOIN \"Main\".provider ON provider = id_provider");
         openedMenu = Menus.Receipts;
         addButton.setDisable(false);
+        mainTable.getColumns().get(0).setText("ID");
+        mainTable.getColumns().get(1).setText("Проведён");
+        mainTable.getColumns().get(2).setText("Поставщик");
+        mainTable.getColumns().get(3).setText("Дата");
     }
     @FXML
     private void onButtonWriteOffClick(ActionEvent event){

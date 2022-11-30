@@ -47,7 +47,7 @@
                         <Insets left="20.0" right="10.0" top="20.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="phoneNumberField" prefHeight="45.0" prefWidth="275.0" promptText="Номер телефона" styleClass="standartTextField">
+                  <TextField fx:id="phoneNumberField" onAction="#onPhoneNumberChanged" prefHeight="45.0" prefWidth="275.0" promptText="+79999999999" styleClass="standartTextField">
                      <font>
                         <Font size="18.0" />
                      </font>

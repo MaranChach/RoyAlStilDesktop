@@ -20,6 +20,8 @@ public class RegistrationPageController extends ElementController{
 
     private boolean loginConfirmed = false;
 
+    private boolean phoneNumberConfirmed = false;
+
     private ConnectionDB connection = new ConnectionDB();
 
     private String confirmationCode;
@@ -99,7 +101,7 @@ public class RegistrationPageController extends ElementController{
 
     @FXML
     private void onRegisterButtonField(ActionEvent actionEvent) throws SQLException, IOException {
-        if(!(codeConfirmed && loginConfirmed)){
+        if(!(codeConfirmed && loginConfirmed && phoneNumberConfirmed)){
             newNotification(errorRegisterLabel);
             return;
         }
@@ -131,5 +133,14 @@ public class RegistrationPageController extends ElementController{
             loginField.setText("Логин не уникален");
         else
             loginConfirmed = true;
+    }
+
+    @FXML
+    private void onPhoneNumberChanged(ActionEvent actionEvent) {
+        if (FieldsMatch.phoneNumberCheck(phoneNumberField.getText())){
+            phoneNumberConfirmed = true;
+        }
+        else
+            phoneNumberConfirmed = false;
     }
 }
