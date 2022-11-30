@@ -1,67 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.RegistrationPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="685.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.RegistrationPageController">
    <children>
-      <TextField fx:id="secondNameField" layoutX="27.0" layoutY="27.0" prefHeight="45.0" prefWidth="200.0" promptText="Фамилия" styleClass="standartTextField">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="firstNameField" layoutX="257.0" layoutY="27.0" prefHeight="45.0" prefWidth="200.0" promptText="Имя" styleClass="standartTextField">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="emailField" layoutX="27.0" layoutY="95.0" onAction="#onEmailChanged" prefHeight="45.0" prefWidth="200.0" promptText="Электронная почта" styleClass="standartTextField">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="phoneNumberField" layoutX="27.0" layoutY="213.0" prefHeight="45.0" prefWidth="200.0" promptText="Номер телефона" styleClass="standartTextField">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="loginField" layoutX="27.0" layoutY="279.0" onAction="#onLoginChanged" prefHeight="45.0" prefWidth="200.0" promptText="Логин" styleClass="standartTextField">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="passwordField" layoutX="257.0" layoutY="279.0" prefHeight="45.0" prefWidth="200.0" promptText="Пароль" styleClass="standartTextField">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <Button fx:id="confirmEmailButton" disable="true" layoutX="257.0" layoutY="155.0" mnemonicParsing="false" onAction="#onConfirmButtonField" prefHeight="45.0" prefWidth="131.0" styleClass="addButton" text="Подтвердить" textFill="WHITE">
+      <AnchorPane prefHeight="360.0" prefWidth="685.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox layoutY="35.0" prefHeight="387.0" prefWidth="344.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="341.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TextField fx:id="secondNameField" prefHeight="45.0" prefWidth="200.0" promptText="Фамилия" styleClass="standartTextField">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" right="10.0" top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="loginField" onAction="#onLoginChanged" prefHeight="45.0" prefWidth="200.0" promptText="Логин" styleClass="standartTextField">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" right="10.0" top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="emailField" onAction="#onEmailChanged" prefHeight="45.0" prefWidth="200.0" promptText="Электронная почта" styleClass="standartTextField">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" right="10.0" top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="confirmationCodeField" disable="true" prefHeight="45.0" prefWidth="200.0" promptText="Код подтверждения" styleClass="standartTextField">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" right="10.0" top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="phoneNumberField" prefHeight="45.0" prefWidth="275.0" promptText="Номер телефона" styleClass="standartTextField">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" right="10.0" top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox prefHeight="387.0" prefWidth="344.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TextField fx:id="firstNameField" prefHeight="45.0" prefWidth="200.0" promptText="Имя" styleClass="standartTextField">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="passwordField" prefHeight="45.0" prefWidth="200.0" promptText="Пароль" styleClass="standartTextField">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <HBox prefHeight="45.0" prefWidth="316.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="sendCodeButton" disable="true" mnemonicParsing="false" onAction="#onSendCodeButtonField" prefHeight="45.0" prefWidth="154.0" styleClass="addButton" text="Отправить код" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="confirmEmailButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onConfirmButtonField" prefHeight="45.0" prefWidth="139.0" styleClass="addButton" text="Подтвердить" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="85.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <Label fx:id="confirmMessageLabel" prefHeight="45.0" prefWidth="305.0" visible="false" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Button fx:id="registerButton" layoutX="200.0" layoutY="360.0" mnemonicParsing="false" onAction="#onRegisterButtonField" prefHeight="45.0" prefWidth="285.0" styleClass="addButton" text="Зарегистрироваться" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="confirmationCodeField" disable="true" layoutX="27.0" layoutY="155.0" prefHeight="45.0" prefWidth="200.0" promptText="Код подтверждения" styleClass="standartTextField">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <Label fx:id="confirmMessageLabel" layoutX="257.0" layoutY="208.0" prefHeight="56.0" prefWidth="305.0" visible="false" wrapText="true">
+      <Label fx:id="errorRegisterLabel" layoutX="145.0" layoutY="432.0" text="Логин не уникален или почта не подтверждена" textFill="RED" visible="false">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="sendCodeButton" layoutX="257.0" layoutY="95.0" mnemonicParsing="false" onAction="#onSendCodeButtonField" prefHeight="45.0" prefWidth="285.0" styleClass="addButton" text="Отправить код подтверждения" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="registerButton" layoutX="27.0" layoutY="334.0" mnemonicParsing="false" onAction="#onRegisterButtonField" prefHeight="45.0" prefWidth="285.0" styleClass="addButton" text="Зарегистрироваться" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

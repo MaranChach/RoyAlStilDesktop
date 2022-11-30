@@ -10,14 +10,14 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="parentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="600.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.OrdersPageController">
+<AnchorPane fx:id="parentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="600.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.ReceiptsPageController">
    <children>
       <CheckBox fx:id="passedCheckBox" disable="true" layoutX="463.0" layoutY="68.0" mnemonicParsing="false" text="Проведён">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <Label fx:id="idLabel" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="274.0" text="Заказ" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <Label fx:id="idLabel" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="255.0" text="Поступление" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -41,10 +41,10 @@
          </children>
       </AnchorPane>
       <Button fx:id="updateButton" disable="true" layoutX="426.0" layoutY="15.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" styleClass="addButton" text="Сохранить" textFill="WHITE" />
-      <ComboBox fx:id="clientComboBox" layoutX="20.0" layoutY="116.0" prefHeight="43.0" prefWidth="274.0" promptText="Клиент" styleClass="standartTextField" />
+      <ComboBox fx:id="providerComboBox" layoutX="20.0" layoutY="116.0" prefHeight="43.0" prefWidth="274.0" promptText="Поставщик" styleClass="standartTextField" />
       <DatePicker fx:id="orderDatePicker" layoutX="20.0" layoutY="60.0" prefHeight="43.0" prefWidth="217.0" promptText="Дата" />
       <Button fx:id="addToOrderButton" layoutX="511.0" layoutY="170.0" mnemonicParsing="false" onAction="#onAddToOrderButtonClick" styleClass="addButton" text="Добавить" textFill="WHITE" />
       <Button fx:id="passButton" disable="true" layoutX="265.0" layoutY="15.0" mnemonicParsing="false" onAction="#onPassButtonClick" styleClass="addButton" text="Провести" textFill="WHITE" />
-      <Button fx:id="deleteFromOrderButton" layoutX="433.0" layoutY="170.0" mnemonicParsing="false" onAction="#onDeleteFromOrderButtonClick" styleClass="deleteButton" text="Удалить" textFill="WHITE" />
+      <Button fx:id="deleteFromReceiptButton" layoutX="433.0" layoutY="170.0" mnemonicParsing="false" onAction="#onDeleteFromReceiptButtonClick" styleClass="deleteButton" text="Удалить" textFill="WHITE" />
    </children>
 </AnchorPane>

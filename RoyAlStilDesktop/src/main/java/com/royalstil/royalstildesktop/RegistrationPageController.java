@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
-public class RegistrationPageController {
+public class RegistrationPageController extends ElementController{
 
 
     private boolean codeConfirmed = false;
@@ -32,6 +32,9 @@ public class RegistrationPageController {
 
     @FXML
     private Button sendCodeButton;
+
+    @FXML
+    private Label errorRegisterLabel;
 
     @FXML
     private Label confirmMessageLabel;
@@ -64,31 +67,43 @@ public class RegistrationPageController {
         EmailUtil.createEmail(emailField.getText() , confirmationCode);
         confirmEmailButton.setDisable(false);
         confirmationCodeField.setDisable(false);
-        confirmMessageLabel.setVisible(true);
+
         confirmMessageLabel.setText("Код отправлен");
+        newNotification(confirmationCodeField);
     }
 
     @FXML
     private void onConfirmButtonField(ActionEvent event) {
         if (confirmationCode.toString().equals(confirmationCodeField.getText().toString())) {
             codeConfirmed = true;
-            confirmMessageLabel.setVisible(true);
+
             confirmMessageLabel.setText("Код верный");
+            newNotification(confirmMessageLabel);
         }
         else {
-            confirmMessageLabel.setVisible(true);
             confirmMessageLabel.setText("Неверный код подтверждения");
+            newNotification(confirmMessageLabel);
         }
     }
 
     public void onEmailChanged(ActionEvent actionEvent) throws SQLException, IOException {
-
+        codeConfirmed = false;
+        if (FieldsMatch.emailCheck(emailField.getText())){
+            sendCodeButton.setDisable(false);
+        }
+        else {
+            sendCodeButton.setDisable(true);
+        }
+        System.out.println();
     }
 
     @FXML
     private void onRegisterButtonField(ActionEvent actionEvent) throws SQLException, IOException {
-        if(!(codeConfirmed && loginConfirmed))
+        if(!(codeConfirmed && loginConfirmed)){
+            newNotification(errorRegisterLabel);
             return;
+        }
+
 
         connection.sendQuery("INSERT INTO \"Main\".employees (second_name, first_name, email, phone_number, login, password) " +
                 "VALUES ('" +
