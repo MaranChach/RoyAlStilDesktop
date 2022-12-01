@@ -24,7 +24,7 @@
       </Label>
       <Line endX="470.0" layoutX="115.0" layoutY="41.0" startX="-100.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
       <TableView fx:id="goodsOnOrderTable" layoutX="20.0" layoutY="206.0" prefHeight="200.0" prefWidth="560.0" styleClass="mainTable" />
-      <Label layoutX="20.0" layoutY="169.0" text="Товары">
+      <Label fx:id="goodsInOrderLabel" layoutX="20.0" layoutY="169.0" text="Товары">
          <font>
             <Font size="18.0" />
          </font>

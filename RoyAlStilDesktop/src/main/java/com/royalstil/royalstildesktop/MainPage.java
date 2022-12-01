@@ -211,15 +211,16 @@ public class MainPage{
 
     @FXML
     private void setFonts(){
-        addButton.setFont(mainFont);
-        clientsButton.setFont(mainFont);
-        goodsButton.setFont(mainFont);
-        ordersButton.setFont(mainFont);
-        providersButton.setFont(mainFont);
-        receiptsButton.setFont(mainFont);
-        goodsTypeButton.setFont(mainFont);
-        logoLabel.setFont(mainFont);
-        mainWindowLabel.setFont(mainFont);
+        Fonts fonts = new Fonts();
+        addButton.setFont(fonts.mainFont);
+        clientsButton.setFont(fonts.mainFont);
+        goodsButton.setFont(fonts.mainFont);
+        ordersButton.setFont(fonts.mainFont);
+        providersButton.setFont(fonts.mainFont);
+        receiptsButton.setFont(fonts.mainFont);
+        goodsTypeButton.setFont(fonts.mainFont);
+        logoLabel.setFont(fonts.logoFont);
+        mainWindowLabel.setFont(fonts.mainFont);
     }
 
     public void onSearch(ActionEvent event) {

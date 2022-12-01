@@ -64,6 +64,12 @@ public class OrdersPageController extends ElementController {
     @FXML
     private Button updateButton;
 
+    @FXML
+    private Label goodsInOrderLabel;
+
+    @FXML
+    private Button deleteFromOrderButton;
+
     //endregion
 
     @FXML
@@ -71,8 +77,23 @@ public class OrdersPageController extends ElementController {
         clientsMap = connectionDB.sendQueryHashMap("SELECT id_client, second_name, first_name, email FROM \"Main\".clients");
         List list = new ArrayList<>(clientsMap.keySet());
         clientComboBox.setItems(FXCollections.observableArrayList(list));
-
+        setFonts();
         setGoodsTable(goodsOnOrderTable);
+    }
+
+    @FXML
+    private void setFonts(){
+        Fonts fonts = new Fonts();
+        idLabel.setFont(fonts.mainFont);
+        passedCheckBox.setFont(fonts.mainFont);
+        deleteFromOrderButton.setFont(fonts.miniFont);
+        addToOrderButton.setFont(fonts.miniFont);
+        idLabel.setFont(fonts.mainFont);
+        goodsInOrderLabel.setFont(fonts.mainFont);
+        deleteButton.setFont(fonts.miniFont);
+        updateButton.setFont(fonts.miniFont);
+        saveButton.setFont(fonts.miniFont);
+        passButton.setFont(fonts.miniFont);
     }
 
     @Override

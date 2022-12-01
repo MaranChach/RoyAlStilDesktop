@@ -20,7 +20,7 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="131.0" layoutY="13.0" text="Вход" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="8.0">
+            <Label fx:id="loginLogoLabel" alignment="CENTER" layoutX="107.0" layoutY="8.0" prefHeight="24.0" prefWidth="86.0" text="Вход" AnchorPane.leftAnchor="107.0" AnchorPane.rightAnchor="107.0" AnchorPane.topAnchor="8.0">
                <font>
                   <Font size="18.0" />
                </font>

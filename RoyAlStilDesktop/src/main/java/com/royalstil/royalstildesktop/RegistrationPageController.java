@@ -63,6 +63,26 @@ public class RegistrationPageController extends ElementController{
     private TextField secondNameField;
 
     @FXML
+    private void initialize(){
+        setFonts();
+    }
+
+    private void setFonts(){
+        Fonts fonts = new Fonts();
+        confirmationCodeField.setFont(fonts.mainFont);
+        firstNameField.setFont(fonts.mainFont);
+        secondNameField.setFont(fonts.mainFont);
+        passwordField.setFont(fonts.mainFont);
+        loginField.setFont(fonts.mainFont);
+        emailField.setFont(fonts.mainFont);
+        phoneNumberField.setFont(fonts.mainFont);
+        confirmEmailButton.setFont(fonts.buttonFont);
+        sendCodeButton.setFont(fonts.buttonFont);
+        registerButton.setFont(fonts.mainFont);
+
+    }
+
+    @FXML
     private void onSendCodeButtonField(ActionEvent actionEvent) {
         Integer code = new Random().nextInt(100000, 999999);
         confirmationCode = code.toString();

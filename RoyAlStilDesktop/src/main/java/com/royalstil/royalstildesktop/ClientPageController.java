@@ -60,11 +60,30 @@ public class ClientPageController extends ElementController{
 
     @FXML
     private TextField secondNameField;
+
+    @FXML
+    private Label ownOrdersLabel;
     //endregion
 
     @FXML
     private void initialize(){
         connection = new ConnectionDB();
+        setFonts();
+    }
+
+    @FXML
+    private void setFonts(){
+        Fonts fonts = new Fonts();
+        firstNameField.setFont(fonts.mainFont);
+        secondNameField.setFont(fonts.mainFont);
+        birthdayField.setFont(fonts.mainFont);
+        emailField.setFont(fonts.mainFont);
+        phoneNumberField.setFont(fonts.mainFont);
+        idLabel.setFont(fonts.mainFont);
+        ownOrdersLabel.setFont(fonts.mainFont);
+        deleteButton.setFont(fonts.miniFont);
+        updateButton.setFont(fonts.miniFont);
+        saveButton.setFont(fonts.miniFont);
     }
 
     @Override
@@ -94,9 +113,6 @@ public class ClientPageController extends ElementController{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
     public void onAddButtonClick(ActionEvent event) throws SQLException, IOException {

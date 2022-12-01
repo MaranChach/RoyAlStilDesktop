@@ -34,7 +34,25 @@ public class LoginPageController extends ElementController {
 
     @FXML
     private Label unknownLoginPasswordLabel;
+
+    @FXML
+    private Label loginLogoLabel;
     //endregion
+
+    @FXML
+    private void initialize(){
+        setFonts();
+    }
+
+    private void setFonts(){
+        Fonts fonts = new Fonts();
+        unknownLoginPasswordLabel.setFont(fonts.mainFont);
+        loginField.setFont(fonts.mainFont);
+        passwordField.setFont(fonts.mainFont);
+        loginButton.setFont(fonts.miniFont);
+        registerButton.setFont(fonts.miniFont);
+        loginLogoLabel.setFont(fonts.mainFont);
+    }
 
     @FXML
     void onLoginButtonClick(ActionEvent event) throws IOException, SQLException {
