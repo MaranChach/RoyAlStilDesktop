@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -71,13 +72,31 @@ public class ClientPageController extends ElementController{
         this.selectedRow = selectedRow;
         updateButton.setDisable(false);
         deleteButton.setDisable(false);
-        secondNameField.setText(selectedRow.get("second_name"));
-        firstNameField.setText(selectedRow.get("first_name"));
-        birthdayField.setText(selectedRow.get("birth_date"));
-        emailField.setText(selectedRow.get("email"));
-        phoneNumberField.setText(selectedRow.get("phone_number"));
-        id = Integer.parseInt(selectedRow.get("id_client"));
+        secondNameField.setText(selectedRow.get("Фамилия"));
+        firstNameField.setText(selectedRow.get("Имя"));
+        birthdayField.setText(selectedRow.get("Дата рождения"));
+        emailField.setText(selectedRow.get("Почта"));
+        phoneNumberField.setText(selectedRow.get("Номер телефона"));
+        id = Integer.parseInt(selectedRow.get("ID"));
         idLabel.setText("Клиент № " + id);
+
+
+        try {
+            ConnectionDB.fillTable(ownOrdersTable, "SELECT id_order, passed, second_name, first_name, email, date FROM \"Main\".orders INNER JOIN \"Main\".clients ON client = id_client WHERE client = " + id);
+            ownOrdersTable.getColumns().get(0).setText("ID");
+            ownOrdersTable.getColumns().get(1).setText("Проведён");
+            ownOrdersTable.getColumns().get(2).setText("Фамилия");
+            ownOrdersTable.getColumns().get(3).setText("Имя");
+            ownOrdersTable.getColumns().get(4).setText("Почта");
+            ownOrdersTable.getColumns().get(5).setText("Дата");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
     public void onAddButtonClick(ActionEvent event) throws SQLException, IOException {

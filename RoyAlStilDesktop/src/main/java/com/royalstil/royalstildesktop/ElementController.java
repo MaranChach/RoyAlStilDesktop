@@ -13,6 +13,8 @@ public class ElementController {
     protected int id;
     protected boolean editable = false;
 
+    protected ConnectionDB connection = new ConnectionDB();
+
     protected HashMap<String, String> selectedRow;
 
     public void setSelectedRow(HashMap<String, String> selectedRow){

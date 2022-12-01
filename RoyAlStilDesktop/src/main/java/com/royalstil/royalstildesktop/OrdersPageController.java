@@ -78,18 +78,19 @@ public class OrdersPageController extends ElementController {
     @Override
     public void setSelectedRow(HashMap<String, String> selectedRow){
         this.selectedRow = selectedRow;
-        passed = parseBool(selectedRow.get("passed"));
-        saveButton.setDisable(true);
+        passed = parseBool(selectedRow.get("Проведён"));
+        passedCheckBox.setSelected(passed);
+        saveButton.setDisable(passed);
         deleteButton.setDisable(passed);
         updateButton.setDisable(passed);
         passButton.setDisable(passed);
         addToOrderButton.setDisable(passed);
-        id = Integer.parseInt(selectedRow.get("id_order"));
+        id = Integer.parseInt(selectedRow.get("ID"));
         idLabel.setText(idLabel.getText() + " № " + id);
-        orderDatePicker.setValue(LocalDate.parse(selectedRow.get("date")));
+        orderDatePicker.setValue(LocalDate.parse(selectedRow.get("Дата")));
         clientComboBox.getSelectionModel().selectFirst();
         for (int i = 0; i < clientComboBox.getItems().size(); i++) {
-            if(clientComboBox.getValue().equals(selectedRow.get("second_name") +" "+ selectedRow.get("first_name") +" "+ selectedRow.get("email") +" "))
+            if(clientComboBox.getValue().equals(selectedRow.get("Фамилия") +" "+ selectedRow.get("Имя") +" "+ selectedRow.get("Почта") +" "))
                 break;
             clientComboBox.getSelectionModel().selectNext();
         }

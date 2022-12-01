@@ -80,18 +80,17 @@ public class GoodsPageController extends ElementController{
 
     @Override
     public void setSelectedRow(HashMap<String, String> selectedRow){
-        id = Integer.parseInt(selectedRow.get("id_goods"));
+        id = Integer.parseInt(selectedRow.get("ID"));
         deleteButton.setDisable(false);
         updateButton.setDisable(false);
-        nameField.setText(selectedRow.get("name"));
-        costField.setText(selectedRow.get("cost"));
-        remainsField.setText(selectedRow.get("remind"));
-        if(selectedRow.get("used").equals("t"))
-            usedCheckBox.setSelected(true);
+        nameField.setText(selectedRow.get("Наименование"));
+        costField.setText(selectedRow.get("Цена"));
+        remainsField.setText(selectedRow.get("Остаток"));
+        usedCheckBox.setSelected(parseBool(selectedRow.get("Б/У")));
 
         goodsTypeComboBox.getSelectionModel().selectFirst();
         for (int i = 0; i < goodsTypeComboBox.getItems().size(); i++) {
-            if (goodsTypeComboBox.getValue().equals(selectedRow.get("name_goods_type")))
+            if (goodsTypeComboBox.getValue().equals(selectedRow.get("Тип") + " "))
                 break;
             goodsTypeComboBox.getSelectionModel().selectNext();
         }

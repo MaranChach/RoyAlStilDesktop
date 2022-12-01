@@ -11,7 +11,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class GoodsTypePageController extends ElementController{
+public class ProvidersPageController extends ElementController{
+
 
 
     @FXML
@@ -22,6 +23,9 @@ public class GoodsTypePageController extends ElementController{
 
     @FXML
     private TextField nameField;
+
+    @FXML
+    private TextField innField;
 
     @FXML
     private AnchorPane notificationPane;
@@ -44,13 +48,14 @@ public class GoodsTypePageController extends ElementController{
     public void setSelectedRow(HashMap<String, String> selectedRow){
         id = Integer.parseInt(selectedRow.get("ID"));
         nameField.setText(selectedRow.get("Наименование"));
+        innField.setText(selectedRow.get("ИНН"));
         updateButton.setDisable(false);
         deleteButton.setDisable(false);
     }
 
     @FXML
     void onAddButtonClick(ActionEvent event) throws SQLException, IOException {
-        id = connection.sendQueryWithId("INSERT INTO \"Main\".goods_type (name_goods_type) VALUES ('" + nameField.getText() + "') RETURNING id_goods_type");
+        id = connection.sendQueryWithId("INSERT INTO \"Main\".provider (name, inn) VALUES ('" + nameField.getText() + "', '" + innField.getText() + "') RETURNING id_provider");
         updateButton.setDisable(false);
         deleteButton.setDisable(false);
         newNotification(notificationPane);
@@ -58,13 +63,13 @@ public class GoodsTypePageController extends ElementController{
 
     @FXML
     void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
-        connection.sendQuery("DELETE FROM \"Main\".goods_type WHERE id_goods_type = " + id);
+        connection.sendQuery("DELETE FROM \"Main\".provider WHERE id_provider = " + id);
         idLabel.getScene().getWindow().hide();
     }
 
     @FXML
     void onUpdateButtonClick(ActionEvent event) throws SQLException, IOException {
-        id = connection.sendQueryWithId("UPDATE \"Main\".goods_type SET name_goods_type = '" + nameField.getText() + "' WHERE id_goods_type = " + id + " RETURNING id_goods_type");
+        id = connection.sendQueryWithId("UPDATE \"Main\".provider SET name = '" + nameField.getText() + "', inn = '" + innField.getText() + "' WHERE id_provider = " + id + " RETURNING id_provider");
         newNotification(notificationPane);
     }
 }

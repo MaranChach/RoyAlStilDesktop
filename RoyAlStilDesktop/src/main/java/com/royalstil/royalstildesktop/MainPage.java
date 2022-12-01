@@ -59,7 +59,7 @@ public class MainPage{
     @FXML
     private Button receiptsButton;
     @FXML
-    private Button writeOffButton;
+    private Button goodsTypeButton;
     //endregion
     //region labelFields
     @FXML
@@ -114,8 +114,13 @@ public class MainPage{
         mainTable.getColumns().get(5).setText("Тип");
     }
     @FXML
-    private void onButtonProvidersClick(ActionEvent event){
-
+    private void onButtonProvidersClick(ActionEvent event) throws SQLException, IOException {
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT * FROM \"Main\".provider");
+        openedMenu = Menus.Providers;
+        addButton.setDisable(false);
+        mainTable.getColumns().get(0).setText("ID");
+        mainTable.getColumns().get(1).setText("Наименование");
+        mainTable.getColumns().get(2).setText("ИНН");
     }
       @FXML
     private void onButtonReceiptsClick(ActionEvent event) throws SQLException, IOException {
@@ -128,8 +133,12 @@ public class MainPage{
         mainTable.getColumns().get(3).setText("Дата");
     }
     @FXML
-    private void onButtonWriteOffClick(ActionEvent event){
-
+    private void onButtonGoodsTypeClick(ActionEvent event) throws SQLException, IOException {
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT * FROM \"Main\".goods_type");
+        openedMenu = Menus.GoodsType;
+        addButton.setDisable(false);
+        mainTable.getColumns().get(0).setText("ID");
+        mainTable.getColumns().get(1).setText("Наименование");
     }
     //endregion
 
@@ -194,6 +203,8 @@ public class MainPage{
             case Goods : return getClass().getResource("GoodsPage.fxml");
             case Orders : return getClass().getResource("OrdersPage.fxml");
             case Receipts : return getClass().getResource("ReceiptsPage.fxml");
+            case GoodsType : return getClass().getResource("GoodsTypePage.fxml");
+            case Providers : return getClass().getResource("ProviderPage.fxml");
             default : return null;
         }
     }
@@ -206,7 +217,7 @@ public class MainPage{
         ordersButton.setFont(mainFont);
         providersButton.setFont(mainFont);
         receiptsButton.setFont(mainFont);
-        writeOffButton.setFont(mainFont);
+        goodsTypeButton.setFont(mainFont);
         logoLabel.setFont(mainFont);
         mainWindowLabel.setFont(mainFont);
     }

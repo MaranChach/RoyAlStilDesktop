@@ -4,5 +4,7 @@ public enum Menus {
     Clients,
     Orders,
     Goods,
-    Receipts
+    Receipts,
+    GoodsType,
+    Providers
 }

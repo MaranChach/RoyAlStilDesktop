@@ -79,18 +79,19 @@ public class ReceiptsPageController extends ElementController {
     @Override
     public void setSelectedRow(HashMap<String, String> selectedRow){
         this.selectedRow = selectedRow;
-        passed = parseBool(selectedRow.get("passed"));
-        saveButton.setDisable(true);
+        passed = parseBool(selectedRow.get("Проведён"));
+        passedCheckBox.setSelected(passed);
+        saveButton.setDisable(passed);
         deleteButton.setDisable(passed);
         updateButton.setDisable(passed);
         passButton.setDisable(passed);
         addToOrderButton.setDisable(passed);
-        id = Integer.parseInt(selectedRow.get("id_receipt_of_goods"));
+        id = Integer.parseInt(selectedRow.get("ID"));
         idLabel.setText(idLabel.getText() + " № " + id);
-        orderDatePicker.setValue(LocalDate.parse(selectedRow.get("date")));
+        orderDatePicker.setValue(LocalDate.parse(selectedRow.get("Дата")));
         providerComboBox.getSelectionModel().selectFirst();
         for (int i = 0; i < providerComboBox.getItems().size(); i++) {
-            if(providerComboBox.getValue().equals(selectedRow.get("name") +" "+ selectedRow.get("inn") + " "))
+            if(providerComboBox.getValue().equals(selectedRow.get("Поставщик") +" "+ selectedRow.get("inn") + " "))
                 break;
             providerComboBox.getSelectionModel().selectNext();
         }

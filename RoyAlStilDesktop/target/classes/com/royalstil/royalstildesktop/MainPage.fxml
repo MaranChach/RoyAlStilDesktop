@@ -50,7 +50,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="writeOffButton" mnemonicParsing="false" onAction="#onButtonWriteOffClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Списание">
+            <Button fx:id="goodsTypeButton" mnemonicParsing="false" onAction="#onButtonGoodsTypeClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Типы товаров">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font>
