@@ -166,6 +166,8 @@ public class OrdersPageController extends ElementController {
     private void onDeleteButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
         connectionDB.sendQuery("DELETE FROM \"Main\".shopping_cart WHERE order_id = " + id);
         connectionDB.sendQuery("DELETE FROM \"Main\".orders WHERE id_order = " + id);
+        //ConnectionDB.fillTable(mainClass.mainTable, "select * from \"Main\".orders");
+        mainClass.onButtonOrdersClick();
         idLabel.getScene().getWindow().hide();
     }
 

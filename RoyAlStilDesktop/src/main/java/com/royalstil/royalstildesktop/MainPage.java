@@ -39,7 +39,7 @@ public class MainPage{
     private Menus openedMenu;
     private HashMap<String, String> selectedRowMap;
     @FXML
-    private TableView<?> mainTable;
+    public TableView<?> mainTable;
     private ObservableList tableData;
 
     @FXML
@@ -78,67 +78,67 @@ public class MainPage{
     //region OnMenuButtonsClickEvents
     @FXML
     private void onButtonClientsClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_client, second_name, first_name, phone_number, email, birth_date FROM \"Main\".clients");
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_client AS \"ID\", second_name AS \"Фамилия\", first_name AS \"Имя\", phone_number AS \"Номер телефона\", email AS \"Почта\", birth_date AS \"Дата рождения\" FROM \"Main\".clients");
         openedMenu = Menus.Clients;
         addButton.setDisable(false);
-        mainTable.getColumns().get(0).setText("ID");
+        /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Фамилия");
         mainTable.getColumns().get(2).setText("Имя");
         mainTable.getColumns().get(3).setText("Номер телефона");
         mainTable.getColumns().get(4).setText("Почта");
-        mainTable.getColumns().get(5).setText("Дата рождения");
+        mainTable.getColumns().get(5).setText("Дата рождения");*/
     }
     @FXML
-    private void onButtonOrdersClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_order, passed, second_name, first_name, email, date FROM \"Main\".orders INNER JOIN \"Main\".clients ON client = id_client");
+    public void onButtonOrdersClick() throws SQLException, IOException {
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_order AS \"ID\", passed AS \"Проведён\", second_name AS \"Фамилия\", first_name AS \"Имя\", email AS \"Почта\", date AS \"Дата\" FROM \"Main\".orders INNER JOIN \"Main\".clients ON client = id_client");
         openedMenu = Menus.Orders;
         addButton.setDisable(false);
-        mainTable.getColumns().get(0).setText("ID");
+        /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Проведён");
         mainTable.getColumns().get(2).setText("Фамилия");
         mainTable.getColumns().get(3).setText("Имя");
         mainTable.getColumns().get(4).setText("Почта");
-        mainTable.getColumns().get(5).setText("Дата");
+        mainTable.getColumns().get(5).setText("Дата");*/
     }
     @FXML
     private void onButtonGoodsClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_goods, name, remind, cost, used, name_goods_type FROM \"Main\".goods " +
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_goods AS \"ID\", name AS \"Наименование\", remind AS \"Остаток\", cost AS \"Цена\", used AS \"Б/У\", name_goods_type AS \"Тип\" FROM \"Main\".goods " +
                 "INNER JOIN \"Main\".goods_type on id_goods_type = goods_type_id");
         openedMenu = Menus.Goods;
         addButton.setDisable(false);
-        mainTable.getColumns().get(0).setText("ID");
+        /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Наименование");
         mainTable.getColumns().get(2).setText("Остаток");
         mainTable.getColumns().get(3).setText("Цена");
         mainTable.getColumns().get(4).setText("Б/У");
-        mainTable.getColumns().get(5).setText("Тип");
+        mainTable.getColumns().get(5).setText("Тип");*/
     }
     @FXML
     private void onButtonProvidersClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT * FROM \"Main\".provider");
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_provider AS \"ID\", name AS \"Наименование\", inn AS \"ИНН\" FROM \"Main\".provider");
         openedMenu = Menus.Providers;
         addButton.setDisable(false);
-        mainTable.getColumns().get(0).setText("ID");
+        /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Наименование");
-        mainTable.getColumns().get(2).setText("ИНН");
+        mainTable.getColumns().get(2).setText("ИНН");*/
     }
       @FXML
     private void onButtonReceiptsClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_receipt_of_goods, passed, name, date FROM \"Main\".receipt_of_goods INNER JOIN \"Main\".provider ON provider = id_provider");
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_receipt_of_goods AS \"ID\", passed AS \"Проведён\", name AS \"Поставщик\", date AS \"Дата\" FROM \"Main\".receipt_of_goods INNER JOIN \"Main\".provider ON provider = id_provider");
         openedMenu = Menus.Receipts;
         addButton.setDisable(false);
-        mainTable.getColumns().get(0).setText("ID");
+        /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Проведён");
         mainTable.getColumns().get(2).setText("Поставщик");
-        mainTable.getColumns().get(3).setText("Дата");
+        mainTable.getColumns().get(3).setText("Дата");*/
     }
     @FXML
     private void onButtonGoodsTypeClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT * FROM \"Main\".goods_type");
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_goods_type AS \"ID\", name_goods_type AS \"Наименование\" FROM \"Main\".goods_type");
         openedMenu = Menus.GoodsType;
         addButton.setDisable(false);
-        mainTable.getColumns().get(0).setText("ID");
-        mainTable.getColumns().get(1).setText("Наименование");
+        /*mainTable.getColumns().get(0).setText("ID");
+        mainTable.getColumns().get(1).setText("Наименование");*/
     }
     //endregion
 
@@ -175,6 +175,7 @@ public class MainPage{
         Parent root = loader.load();
         ElementController newPageController = loader.getController();
         newPageController.setSelectedRow(valueMap);
+        newPageController.setMainClass(this);
         newPageController.setEditable(true);
         Scene newScene = new Scene(root);
         newStage.setScene(newScene);

@@ -15,6 +15,8 @@ public class ElementController {
 
     protected ConnectionDB connection = new ConnectionDB();
 
+    public MainPage mainClass;
+
     protected HashMap<String, String> selectedRow;
 
     public void setSelectedRow(HashMap<String, String> selectedRow){
@@ -63,5 +65,9 @@ public class ElementController {
             return true;
         else
             return false;
+    }
+
+    public void setMainClass(MainPage mainClass){
+        this.mainClass = mainClass;
     }
 }
