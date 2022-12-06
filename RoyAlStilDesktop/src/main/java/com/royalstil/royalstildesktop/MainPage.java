@@ -33,6 +33,7 @@ import java.util.List;
 public class MainPage{
 
 
+    public static String userId;
     private ConnectionDB connection;
     private final Font mainFont = Font.loadFont(getClass().getResource("InterFont/Inter-Regular.otf").toExternalForm(), 20);
 
@@ -77,10 +78,11 @@ public class MainPage{
 
     //region OnMenuButtonsClickEvents
     @FXML
-    private void onButtonClientsClick(ActionEvent event) throws SQLException, IOException {
+    public void onButtonClientsClick(ActionEvent event) throws SQLException, IOException {
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_client AS \"ID\", second_name AS \"Фамилия\", first_name AS \"Имя\", phone_number AS \"Номер телефона\", email AS \"Почта\", birth_date AS \"Дата рождения\" FROM \"Main\".clients");
         openedMenu = Menus.Clients;
         addButton.setDisable(false);
+        mainWindowLabel.setText(clientsButton.getText());
         /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Фамилия");
         mainTable.getColumns().get(2).setText("Имя");
@@ -89,10 +91,11 @@ public class MainPage{
         mainTable.getColumns().get(5).setText("Дата рождения");*/
     }
     @FXML
-    public void onButtonOrdersClick() throws SQLException, IOException {
+    public void onButtonOrdersClick(ActionEvent event) throws SQLException, IOException {
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_order AS \"ID\", passed AS \"Проведён\", second_name AS \"Фамилия\", first_name AS \"Имя\", email AS \"Почта\", date AS \"Дата\" FROM \"Main\".orders INNER JOIN \"Main\".clients ON client = id_client");
         openedMenu = Menus.Orders;
         addButton.setDisable(false);
+        mainWindowLabel.setText(ordersButton.getText());
         /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Проведён");
         mainTable.getColumns().get(2).setText("Фамилия");
@@ -101,11 +104,12 @@ public class MainPage{
         mainTable.getColumns().get(5).setText("Дата");*/
     }
     @FXML
-    private void onButtonGoodsClick(ActionEvent event) throws SQLException, IOException {
-        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_goods AS \"ID\", name AS \"Наименование\", remind AS \"Остаток\", cost AS \"Цена\", used AS \"Б/У\", name_goods_type AS \"Тип\" FROM \"Main\".goods " +
+    public void onButtonGoodsClick(ActionEvent event) throws SQLException, IOException {
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_goods AS \"ID\", name AS \"Наименование\", remind AS \"Остаток\", cost AS \"Цена\", used AS \"Б/У\", name_goods_type AS \"Тип\", image_url AS \"Картинка\" FROM \"Main\".goods " +
                 "INNER JOIN \"Main\".goods_type on id_goods_type = goods_type_id");
         openedMenu = Menus.Goods;
         addButton.setDisable(false);
+        mainWindowLabel.setText(goodsButton.getText());
         /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Наименование");
         mainTable.getColumns().get(2).setText("Остаток");
@@ -114,29 +118,32 @@ public class MainPage{
         mainTable.getColumns().get(5).setText("Тип");*/
     }
     @FXML
-    private void onButtonProvidersClick(ActionEvent event) throws SQLException, IOException {
+    public void onButtonProvidersClick(ActionEvent event) throws SQLException, IOException {
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_provider AS \"ID\", name AS \"Наименование\", inn AS \"ИНН\" FROM \"Main\".provider");
         openedMenu = Menus.Providers;
         addButton.setDisable(false);
+        mainWindowLabel.setText(providersButton.getText());
         /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Наименование");
         mainTable.getColumns().get(2).setText("ИНН");*/
     }
       @FXML
-    private void onButtonReceiptsClick(ActionEvent event) throws SQLException, IOException {
+    public void onButtonReceiptsClick(ActionEvent event) throws SQLException, IOException {
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_receipt_of_goods AS \"ID\", passed AS \"Проведён\", name AS \"Поставщик\", date AS \"Дата\" FROM \"Main\".receipt_of_goods INNER JOIN \"Main\".provider ON provider = id_provider");
         openedMenu = Menus.Receipts;
         addButton.setDisable(false);
+        mainWindowLabel.setText(receiptsButton.getText());
         /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Проведён");
         mainTable.getColumns().get(2).setText("Поставщик");
         mainTable.getColumns().get(3).setText("Дата");*/
     }
     @FXML
-    private void onButtonGoodsTypeClick(ActionEvent event) throws SQLException, IOException {
+    public void onButtonGoodsTypeClick(ActionEvent event) throws SQLException, IOException {
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_goods_type AS \"ID\", name_goods_type AS \"Наименование\" FROM \"Main\".goods_type");
         openedMenu = Menus.GoodsType;
         addButton.setDisable(false);
+        mainWindowLabel.setText(goodsTypeButton.getText());
         /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Наименование");*/
     }
@@ -157,7 +164,11 @@ public class MainPage{
                         HashMap<String, String> valueMap = new HashMap<>();
                         ObservableList valueList = (ObservableList) newVal;
                         for (int i = 0; i < mainTable.getColumns().size(); i++) {
-                            valueMap.put(mainTable.getColumns().get(i).getText(), valueList.get(i).toString());
+                            if (valueList.get(i) != null){
+                                valueMap.put(mainTable.getColumns().get(i).getText(), valueList.get(i).toString());
+                            }
+                            else
+                                valueMap.put(mainTable.getColumns().get(i).getText(), "");
                         }
                         selectedRowMap = valueMap;
                         openNewScene(valueMap);
@@ -187,6 +198,8 @@ public class MainPage{
         Stage newStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getSceneFile());
         Parent root = loader.load();
+        ElementController elementController = loader.getController();
+        elementController.setMainClass(this);
         Scene newScene = new Scene(root);
         newStage.setScene(newScene);
         newStage.setResizable(false);
@@ -233,11 +246,6 @@ public class MainPage{
 
      */
     //endregion
-
-
-
-
-
     //region garbage
     /*
     private void fillTable(TableView tableView, String query) throws SQLException, IOException {

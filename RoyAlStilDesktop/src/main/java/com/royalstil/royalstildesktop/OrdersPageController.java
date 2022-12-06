@@ -106,6 +106,7 @@ public class OrdersPageController extends ElementController {
         updateButton.setDisable(passed);
         passButton.setDisable(passed);
         addToOrderButton.setDisable(passed);
+        deleteFromOrderButton.setDisable(passed);
         id = Integer.parseInt(selectedRow.get("ID"));
         idLabel.setText(idLabel.getText() + " № " + id);
         orderDatePicker.setValue(LocalDate.parse(selectedRow.get("Дата")));
@@ -160,6 +161,7 @@ public class OrdersPageController extends ElementController {
         addGoodsInCart();
         idLabel.setText("Заказ № " + id);
         newNotification(notificationPane);
+        mainClass.onButtonOrdersClick(new ActionEvent());
     }
 
     @FXML
@@ -167,7 +169,7 @@ public class OrdersPageController extends ElementController {
         connectionDB.sendQuery("DELETE FROM \"Main\".shopping_cart WHERE order_id = " + id);
         connectionDB.sendQuery("DELETE FROM \"Main\".orders WHERE id_order = " + id);
         //ConnectionDB.fillTable(mainClass.mainTable, "select * from \"Main\".orders");
-        mainClass.onButtonOrdersClick();
+        mainClass.onButtonOrdersClick(new ActionEvent());
         idLabel.getScene().getWindow().hide();
     }
 
@@ -186,6 +188,7 @@ public class OrdersPageController extends ElementController {
         connectionDB.sendQuery("DELETE FROM \"Main\".shopping_cart WHERE order_id = " + id);
         addGoodsInCart();
         newNotification(notificationPane);
+        mainClass.onButtonOrdersClick(new ActionEvent());
     }
 
     private void addGoodsInCart() throws SQLException, IOException {
@@ -220,6 +223,7 @@ public class OrdersPageController extends ElementController {
         }
         passed = true;
         passedCheckBox.setSelected(passed);
+        mainClass.onButtonOrdersClick(new ActionEvent());
         passedCheckBox.getScene().getWindow().hide();
     }
 

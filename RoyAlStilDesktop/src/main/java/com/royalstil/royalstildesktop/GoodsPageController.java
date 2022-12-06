@@ -66,6 +66,9 @@ public class GoodsPageController extends ElementController{
     @FXML
     private CheckBox usedCheckBox;
 
+    @FXML
+    private TextField imgUrlField;
+
     //endregion
 
     @FXML
@@ -87,6 +90,8 @@ public class GoodsPageController extends ElementController{
         costField.setText(selectedRow.get("Цена"));
         remainsField.setText(selectedRow.get("Остаток"));
         usedCheckBox.setSelected(parseBool(selectedRow.get("Б/У")));
+        imgUrlField.setText(selectedRow.get("Картинка"));
+
 
         goodsTypeComboBox.getSelectionModel().selectFirst();
         for (int i = 0; i < goodsTypeComboBox.getItems().size(); i++) {
@@ -98,7 +103,7 @@ public class GoodsPageController extends ElementController{
 
     @FXML
     private void onAddButtonClick(ActionEvent event) throws SQLException, IOException {
-        id = connection.sendQueryWithId("insert into \"Main\".goods (name, cost, remind, used, goods_type_id)" +
+        id = connection.sendQueryWithId("insert into \"Main\".goods (name, cost, remind, used, goods_type_id, image_url)" +
                 "values ('" +
                 nameField.getText() +
                 "', " +
@@ -109,9 +114,12 @@ public class GoodsPageController extends ElementController{
                 usedCheckBox.isSelected() +
                 ", " +
                 goodsTypeMap.get(goodsTypeComboBox.getValue()) +
-                ") " +
+                ", '" +
+                imgUrlField.getText() +
+                "') " +
                 "RETURNING id_goods");
         newNotification(notificationPane);
+        mainClass.onButtonGoodsClick(new ActionEvent());
     }
 
     @FXML
@@ -119,8 +127,8 @@ public class GoodsPageController extends ElementController{
         if(!editable)
             return;
         connection.sendQuery("DELETE FROM \"Main\".goods WHERE id_goods = " + id);
+        mainClass.onButtonGoodsClick(new ActionEvent());
         costField.getScene().getWindow().hide();
-        newNotification(notificationPane);
     }
 
     @FXML
@@ -142,10 +150,18 @@ public class GoodsPageController extends ElementController{
                 "', goods_type_id = " +
                 "'" +
                 goodsTypeMap.get(goodsTypeComboBox.getValue()) +
-                "' " +
-                "WHERE id_goods = " +
+                "', image_url = " +
+                "'" +
+                imgUrlField.getText() +
+                "' WHERE id_goods = " +
                 id +
                 "RETURNING id_goods");
         newNotification(notificationPane);
+        mainClass.onButtonGoodsClick(new ActionEvent());
+    }
+
+    private void setFonts(){
+        Fonts fonts = new Fonts();
+        nameField.setFont(fonts.mainFont);
     }
 }

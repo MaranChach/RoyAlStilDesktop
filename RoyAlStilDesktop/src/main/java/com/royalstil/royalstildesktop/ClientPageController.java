@@ -142,14 +142,15 @@ public class ClientPageController extends ElementController{
         id = connection.sendQueryWithId(query);
         idLabel.setText("Клиент № " + id);
         newNotification(notificationPane);
+        mainClass.onButtonClientsClick(new ActionEvent());
     }
-
 
     public void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
         connection.sendQuery("DELETE FROM \"Main\".clients WHERE " +
                 "id_client = " +
                 id);
         newNotification(notificationPane);
+        mainClass.onButtonClientsClick(new ActionEvent());
         firstNameField.getScene().getWindow().hide();
     }
 
@@ -175,5 +176,6 @@ public class ClientPageController extends ElementController{
                 "RETURNING id_client";
         connection.sendQuery(query);
         newNotification(notificationPane);
+        mainClass.onButtonClientsClick(new ActionEvent());
     }
 }

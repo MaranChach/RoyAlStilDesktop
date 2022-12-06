@@ -37,6 +37,9 @@ public class ReceiptsPageController extends ElementController {
     private Button addToOrderButton;
 
     @FXML
+    private Button deleteFromReceiptButton;
+
+    @FXML
     private CheckBox passedCheckBox;
 
     @FXML
@@ -86,6 +89,7 @@ public class ReceiptsPageController extends ElementController {
         updateButton.setDisable(passed);
         passButton.setDisable(passed);
         addToOrderButton.setDisable(passed);
+        deleteFromReceiptButton.setDisable(passed);
         id = Integer.parseInt(selectedRow.get("ID"));
         idLabel.setText(idLabel.getText() + " № " + id);
         orderDatePicker.setValue(LocalDate.parse(selectedRow.get("Дата")));
@@ -144,12 +148,14 @@ public class ReceiptsPageController extends ElementController {
         updateButton.setDisable(false);
         deleteButton.setDisable(false);
         saveButton.setDisable(true);
+        mainClass.onButtonReceiptsClick(new ActionEvent());
     }
 
     @FXML
     private void onDeleteButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
         connectionDB.sendQuery("DELETE FROM \"Main\".receipt_of_goods_cart WHERE receipt_of_goods_id = " + id);
         connectionDB.sendQuery("DELETE FROM \"Main\".receipt_of_goods WHERE id_receipt_of_goods = " + id);
+        mainClass.onButtonReceiptsClick(new ActionEvent());
         idLabel.getScene().getWindow().hide();
     }
 
@@ -168,6 +174,7 @@ public class ReceiptsPageController extends ElementController {
         connectionDB.sendQuery("DELETE FROM \"Main\".receipt_of_goods_cart WHERE receipt_of_goods_id = " + id);
         addGoodsInCart();
         newNotification(notificationPane);
+        mainClass.onButtonReceiptsClick(new ActionEvent());
     }
 
     private void addGoodsInCart() throws SQLException, IOException {

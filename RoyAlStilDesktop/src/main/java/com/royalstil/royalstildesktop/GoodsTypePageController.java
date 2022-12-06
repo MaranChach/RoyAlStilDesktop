@@ -46,6 +46,7 @@ public class GoodsTypePageController extends ElementController{
         nameField.setText(selectedRow.get("Наименование"));
         updateButton.setDisable(false);
         deleteButton.setDisable(false);
+
     }
 
     @FXML
@@ -54,11 +55,13 @@ public class GoodsTypePageController extends ElementController{
         updateButton.setDisable(false);
         deleteButton.setDisable(false);
         newNotification(notificationPane);
+        mainClass.onButtonGoodsTypeClick(new ActionEvent());
     }
 
     @FXML
     void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
         connection.sendQuery("DELETE FROM \"Main\".goods_type WHERE id_goods_type = " + id);
+        mainClass.onButtonGoodsTypeClick(new ActionEvent());
         idLabel.getScene().getWindow().hide();
     }
 
@@ -66,5 +69,6 @@ public class GoodsTypePageController extends ElementController{
     void onUpdateButtonClick(ActionEvent event) throws SQLException, IOException {
         id = connection.sendQueryWithId("UPDATE \"Main\".goods_type SET name_goods_type = '" + nameField.getText() + "' WHERE id_goods_type = " + id + " RETURNING id_goods_type");
         newNotification(notificationPane);
+        mainClass.onButtonGoodsTypeClick(new ActionEvent());
     }
 }

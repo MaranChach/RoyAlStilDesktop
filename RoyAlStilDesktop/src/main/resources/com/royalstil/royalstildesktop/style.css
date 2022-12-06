@@ -5,6 +5,7 @@
 .standartTextField{
     -fx-background-radius: 30;
     -fx-background-color: rgb(217, 217, 217);
+    -fx-font-family: "Inter"
 }
 
 .menuButton{

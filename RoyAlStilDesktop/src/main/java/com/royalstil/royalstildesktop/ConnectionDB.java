@@ -191,7 +191,10 @@ public class ConnectionDB {
             col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
                 @Override
                 public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
-                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                    if (param.getValue().get(j) != null){
+                        return new SimpleStringProperty(param.getValue().get(j).toString());
+                    }
+                    return new SimpleStringProperty("");
                 }
             });
 

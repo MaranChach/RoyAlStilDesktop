@@ -59,11 +59,13 @@ public class ProvidersPageController extends ElementController{
         updateButton.setDisable(false);
         deleteButton.setDisable(false);
         newNotification(notificationPane);
+        mainClass.onButtonProvidersClick(new ActionEvent());
     }
 
     @FXML
     void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
         connection.sendQuery("DELETE FROM \"Main\".provider WHERE id_provider = " + id);
+        mainClass.onButtonProvidersClick(new ActionEvent());
         idLabel.getScene().getWindow().hide();
     }
 
@@ -71,5 +73,6 @@ public class ProvidersPageController extends ElementController{
     void onUpdateButtonClick(ActionEvent event) throws SQLException, IOException {
         id = connection.sendQueryWithId("UPDATE \"Main\".provider SET name = '" + nameField.getText() + "', inn = '" + innField.getText() + "' WHERE id_provider = " + id + " RETURNING id_provider");
         newNotification(notificationPane);
+        mainClass.onButtonProvidersClick(new ActionEvent());
     }
 }
