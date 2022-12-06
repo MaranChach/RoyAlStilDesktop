@@ -63,6 +63,11 @@
                   <Font name="Segoe UI" size="20.0" />
                </font>
             </Button>
+            <Button fx:id="reportButton" mnemonicParsing="false" onAction="#onButtonReportClick" prefHeight="40.0" prefWidth="175.0" styleClass="menuButton" text="Отчет">
+               <font>
+                  <Font name="Segoe UI" size="20.0" />
+               </font>
+            </Button>
          </children>
          <opaqueInsets>
             <Insets />

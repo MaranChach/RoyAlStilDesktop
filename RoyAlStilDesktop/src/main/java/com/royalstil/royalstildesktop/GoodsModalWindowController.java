@@ -31,7 +31,8 @@ public class GoodsModalWindowController {
 
     @FXML
     private void initialize() throws SQLException, IOException {
-        ConnectionDB.fillTable(goodsTable, "SELECT * FROM \"Main\".goods");
+        ConnectionDB.fillTable(goodsTable, "SELECT id_goods AS \"ID\", name AS \"Наименование\", remind AS \"Остаток\", cost AS \"Цена\", used AS \"Б/У\", name_goods_type AS \"Тип\" FROM \"Main\".goods " +
+                "INNER JOIN \"Main\".goods_type on id_goods_type = goods_type_id");
         setListener();
     }
 
@@ -62,7 +63,7 @@ public class GoodsModalWindowController {
                             valueMap.put(goodsTable.getColumns().get(i).getText(), valueList.get(i).toString());
                         }
                         ObservableList list = FXCollections.observableArrayList();
-                        tableView.getItems().add(new SelectedGoods(Integer.parseInt(valueMap.get("id_goods")), valueMap.get("name"), Integer.parseInt(numberField.getText()), Double.parseDouble(valueMap.get("cost"))));
+                        tableView.getItems().add(new SelectedGoods(Integer.parseInt(valueMap.get("ID")), valueMap.get("Наименование"), Integer.parseInt(numberField.getText()), Double.parseDouble(valueMap.get("Цена"))));
                         goodsTable.getScene().getWindow().hide();
                     }catch (Exception e){
                         e.printStackTrace();

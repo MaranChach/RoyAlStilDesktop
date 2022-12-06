@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="parentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="600.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.ReportPageController">
+   <children>
+      <Label fx:id="idLabel" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="321.0" text="Отчёт по продажам" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Line endX="470.0" layoutX="115.0" layoutY="41.0" startX="-100.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
+      <AnchorPane fx:id="notificationPane" opacity="0.71" prefHeight="65.0" prefWidth="237.0" styleClass="notification" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="6.0" prefHeight="54.0" prefWidth="241.0" text="Изменения сохранены" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <DatePicker fx:id="fromDatePicker" layoutX="62.0" layoutY="70.0" promptText="Начало" />
+      <DatePicker fx:id="toDatePicker" layoutX="353.0" layoutY="70.0" promptText="Конец" />
+      <Button fx:id="createReportButton" layoutX="218.0" layoutY="146.0" mnemonicParsing="false" onAction="#createReportButtonClick" prefHeight="45.0" prefWidth="161.0" styleClass="addButton" text="Сформировать" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TableView layoutX="62.0" layoutY="169.0" prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

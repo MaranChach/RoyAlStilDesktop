@@ -34,6 +34,7 @@ public class MainPage{
 
 
     public static String userId;
+
     private ConnectionDB connection;
     private final Font mainFont = Font.loadFont(getClass().getResource("InterFont/Inter-Regular.otf").toExternalForm(), 20);
 
@@ -61,6 +62,8 @@ public class MainPage{
     private Button receiptsButton;
     @FXML
     private Button goodsTypeButton;
+    @FXML
+    private Button reportButton;
     //endregion
     //region labelFields
     @FXML
@@ -238,6 +241,10 @@ public class MainPage{
     }
 
     public void onSearch(ActionEvent event) {
+    }
+
+    public void onButtonReportClick(ActionEvent event) {
+
     }
 
     //region notes
