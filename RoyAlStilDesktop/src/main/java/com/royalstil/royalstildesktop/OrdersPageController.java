@@ -79,6 +79,7 @@ public class OrdersPageController extends ElementController {
         clientComboBox.setItems(FXCollections.observableArrayList(list));
         setFonts();
         setGoodsTable(goodsOnOrderTable);
+        orderDatePicker.setValue(LocalDate.now());
     }
 
     @FXML
@@ -210,6 +211,7 @@ public class OrdersPageController extends ElementController {
     }
 
     public void onPassButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
+        addGoodsInCart();
         connectionDB.sendQuery("UPDATE \"Main\".orders SET" +
                 " passed = true " +
                 "WHERE id_order = " +

@@ -77,6 +77,7 @@ public class ReceiptsPageController extends ElementController {
         List list = new ArrayList(providerMap.keySet());
         providerComboBox.setItems(FXCollections.observableArrayList(list));
         setGoodsTable(goodsOnOrderTable);
+        orderDatePicker.setValue(LocalDate.now());
     }
 
     @Override

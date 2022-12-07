@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -75,7 +76,7 @@ public class MainPage{
     @FXML
     private void initialize(){
         connection = new ConnectionDB();
-        setFonts();
+        //setFonts();
         setListener();
     }
 
@@ -150,6 +151,18 @@ public class MainPage{
         /*mainTable.getColumns().get(0).setText("ID");
         mainTable.getColumns().get(1).setText("Наименование");*/
     }
+
+    @FXML
+    private void onButtonReportClick(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportPage.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Отчёт по продажам");
+        stage.show();
+    }
+
     //endregion
 
     @FXML
@@ -243,8 +256,12 @@ public class MainPage{
     public void onSearch(ActionEvent event) {
     }
 
-    public void onButtonReportClick(ActionEvent event) {
 
+
+    public void setFontsGlob(Node... nodes){
+        for (Node node : nodes) {
+
+        }
     }
 
     //region notes
