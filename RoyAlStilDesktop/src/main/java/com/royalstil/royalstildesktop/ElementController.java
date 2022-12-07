@@ -1,11 +1,14 @@
 package com.royalstil.royalstildesktop;
 
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -69,5 +72,19 @@ public class ElementController {
 
     public void setMainClass(MainPage mainClass){
         this.mainClass = mainClass;
+    }
+
+    protected boolean confirmAction(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Удаление");
+        alert.setHeaderText("Подтвердите действие");
+        alert.setContentText("");
+
+        Optional<ButtonType> option = alert.showAndWait();
+        if(option.get() == ButtonType.OK) {
+            return true;
+        }
+        else
+            return false;
     }
 }

@@ -2,19 +2,14 @@ package com.royalstil.royalstildesktop;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
 public class ClientPageController extends ElementController{
@@ -146,6 +141,9 @@ public class ClientPageController extends ElementController{
     }
 
     public void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
+        if(!confirmAction()){
+            return;
+        }
         connection.sendQuery("DELETE FROM \"Main\".clients WHERE " +
                 "id_client = " +
                 id);

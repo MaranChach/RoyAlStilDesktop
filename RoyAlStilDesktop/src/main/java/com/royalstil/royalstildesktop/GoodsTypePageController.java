@@ -60,6 +60,8 @@ public class GoodsTypePageController extends ElementController{
 
     @FXML
     void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
+        if(!confirmAction())
+            return;
         connection.sendQuery("DELETE FROM \"Main\".goods_type WHERE id_goods_type = " + id);
         mainClass.onButtonGoodsTypeClick(new ActionEvent());
         idLabel.getScene().getWindow().hide();

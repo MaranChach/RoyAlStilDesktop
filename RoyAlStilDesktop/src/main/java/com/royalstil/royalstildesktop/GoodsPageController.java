@@ -126,6 +126,8 @@ public class GoodsPageController extends ElementController{
     private void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
         if(!editable)
             return;
+        if(!confirmAction())
+            return;
         connection.sendQuery("DELETE FROM \"Main\".goods WHERE id_goods = " + id);
         mainClass.onButtonGoodsClick(new ActionEvent());
         costField.getScene().getWindow().hide();

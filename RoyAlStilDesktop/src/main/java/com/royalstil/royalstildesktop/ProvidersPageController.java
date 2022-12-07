@@ -64,6 +64,9 @@ public class ProvidersPageController extends ElementController{
 
     @FXML
     void onDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
+        if(!confirmAction()){
+            return;
+        }
         connection.sendQuery("DELETE FROM \"Main\".provider WHERE id_provider = " + id);
         mainClass.onButtonProvidersClick(new ActionEvent());
         idLabel.getScene().getWindow().hide();

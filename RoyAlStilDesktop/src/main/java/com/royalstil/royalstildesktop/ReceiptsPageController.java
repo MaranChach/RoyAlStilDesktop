@@ -154,6 +154,9 @@ public class ReceiptsPageController extends ElementController {
 
     @FXML
     private void onDeleteButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
+        if(!confirmAction()){
+            return;
+        }
         connectionDB.sendQuery("DELETE FROM \"Main\".receipt_of_goods_cart WHERE receipt_of_goods_id = " + id);
         connectionDB.sendQuery("DELETE FROM \"Main\".receipt_of_goods WHERE id_receipt_of_goods = " + id);
         mainClass.onButtonReceiptsClick(new ActionEvent());

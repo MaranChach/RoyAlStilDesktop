@@ -1,11 +1,9 @@
 package com.royalstil.royalstildesktop;
 
-import javafx.beans.Observable;
-import javafx.beans.property.SimpleStringProperty;
+
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,19 +14,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class MainPage{
@@ -37,7 +27,7 @@ public class MainPage{
     public static String userId;
 
     private ConnectionDB connection;
-    private final Font mainFont = Font.loadFont(getClass().getResource("InterFont/Inter-Regular.otf").toExternalForm(), 20);
+    //private final Font mainFont = new Fonts().mainFont;
 
     private Menus openedMenu;
     private HashMap<String, String> selectedRowMap;

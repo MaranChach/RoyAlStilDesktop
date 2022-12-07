@@ -152,26 +152,35 @@ public class OrdersPageController extends ElementController {
 
     @FXML
     private void onAddButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
-        id = connectionDB.sendQueryWithId("insert into \"Main\".orders (client, date)" +
-                "values ('" +
-                clientsMap.get(clientComboBox.getValue()) +
-                "', '" +
-                orderDatePicker.getValue().toString() +
-                "') " +
-                "RETURNING id_order");
-        addGoodsInCart();
-        idLabel.setText("Заказ № " + id);
-        newNotification(notificationPane);
-        mainClass.onButtonOrdersClick(new ActionEvent());
+        if(clientComboBox.getValue() != null){
+            id = connectionDB.sendQueryWithId("insert into \"Main\".orders (client, date)" +
+                    "values ('" +
+                    clientsMap.get(clientComboBox.getValue()) +
+                    "', '" +
+                    orderDatePicker.getValue().toString() +
+                    "') " +
+                    "RETURNING id_order");
+            addGoodsInCart();
+            idLabel.setText("Заказ № " + id);
+            passButton.setDisable(false);
+            updateButton.setDisable(false);
+            deleteButton.setDisable(false);
+            saveButton.setDisable(true);
+            newNotification(notificationPane);
+            mainClass.onButtonOrdersClick(new ActionEvent());
+        }
+
     }
 
     @FXML
     private void onDeleteButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
-        connectionDB.sendQuery("DELETE FROM \"Main\".shopping_cart WHERE order_id = " + id);
-        connectionDB.sendQuery("DELETE FROM \"Main\".orders WHERE id_order = " + id);
-        //ConnectionDB.fillTable(mainClass.mainTable, "select * from \"Main\".orders");
-        mainClass.onButtonOrdersClick(new ActionEvent());
-        idLabel.getScene().getWindow().hide();
+        if(!confirmAction()) {
+            return;
+        }
+            connectionDB.sendQuery("DELETE FROM \"Main\".shopping_cart WHERE order_id = " + id);
+            connectionDB.sendQuery("DELETE FROM \"Main\".orders WHERE id_order = " + id);
+            mainClass.onButtonOrdersClick(new ActionEvent());
+            idLabel.getScene().getWindow().hide();
     }
 
     @FXML
@@ -204,10 +213,6 @@ public class OrdersPageController extends ElementController {
                     ")" +
                     "RETURNING order_id");
         }
-        passButton.setDisable(false);
-        updateButton.setDisable(false);
-        deleteButton.setDisable(false);
-        saveButton.setDisable(true);
     }
 
     public void onPassButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
