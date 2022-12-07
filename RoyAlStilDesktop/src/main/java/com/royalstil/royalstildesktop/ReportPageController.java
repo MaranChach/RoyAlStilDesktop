@@ -36,7 +36,7 @@ public class ReportPageController {
     private TableView reportTable;
 
     public void createReportButtonClick(ActionEvent event) throws SQLException, IOException {
-        ConnectionDB.fillTable(reportTable, "SELECT date AS \"Дата\", first_name AS \"Имя\", second_name AS \"Фамилия\", phone_number AS \"Номер телефона\", name AS \"Наименование товара\", used AS \"Б/У\", cost AS \"Цена\", number AS \"Количество\" FROM \"Main\".shopping_cart \n" +
+        ConnectionDB.fillTable(reportTable, "SELECT date AS \"Дата\", first_name AS \"Имя\", second_name AS \"Фамилия\", phone_number AS \"Номер телефона\", name AS \"Наименование товара\", used AS \"Б/У\", cost AS \"Цена\", number AS \"Количество\", cost * number AS \"Сумма\" FROM \"Main\".shopping_cart \n" +
                 "INNER JOIN \"Main\".goods ON goods_id = id_goods \n" +
                 "INNER JOIN \"Main\".orders ON order_id = id_order \n" +
                 "INNER JOIN \"Main\".clients ON orders.client = id_client\n" +
