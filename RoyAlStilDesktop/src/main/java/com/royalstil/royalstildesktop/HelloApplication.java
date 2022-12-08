@@ -20,8 +20,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        //launch();
-        ClassUML classUML = new ClassUML();
+        launch();
+        /*ClassUML classUML = new ClassUML();
         Class[] classes = new Class[]{
                 ChartPageController.class, Client.class, ClientPageController.class,
                 ConnectionDB.class, ElementController.class, EmailUtil.class,
@@ -34,7 +34,7 @@ public class HelloApplication extends Application {
 
         for (Class className : classes) {
             classUML.printSummary(className);
-        }
+        }*/
 
     }
 }
