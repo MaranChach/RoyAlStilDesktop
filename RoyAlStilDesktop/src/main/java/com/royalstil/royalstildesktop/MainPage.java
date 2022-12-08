@@ -157,7 +157,7 @@ public class MainPage{
 
     @FXML
     private void onMainTableClick(MouseEvent mouseEvent) {
-        var a = mainTable.getSelectionModel().getSelectedItem();
+
     }
 
     private void setListener(){
@@ -243,7 +243,29 @@ public class MainPage{
         mainWindowLabel.setFont(fonts.mainFont);
     }
 
-    public void onSearch(ActionEvent event) {
+    public void onSearch(ActionEvent event) throws SQLException, IOException {
+        switch (openedMenu){
+            case Clients : ConnectionDB.fillTable(mainTable, "SELECT id_client AS \"ID\", second_name AS \"Фамилия\", first_name AS \"Имя\", phone_number AS \"Номер телефона\", email AS \"Почта\", birth_date AS \"Дата рождения\" FROM \"Main\".clients " +
+                    "WHERE second_name LIKE '%" + searchField.getText() + "%' OR " +
+                    "first_name LIKE '%" + searchField.getText() + "%' OR " +
+                    "phone_number LIKE '%" + searchField.getText() + "%' OR " +
+                    "email LIKE '%" + searchField.getText() + "%'  " +
+                    "" );
+            case Goods : ConnectionDB.fillTable(mainTable, "SELECT id_goods AS \"ID\", name AS \"Наименование\", remind AS \"Остаток\", cost AS \"Цена\", used AS \"Б/У\", name_goods_type AS \"Тип\", image_url AS \"Картинка\" FROM \"Main\".goods " +
+                    "INNER JOIN \"Main\".goods_type on id_goods_type = goods_type_id " +
+                    "WHERE name LIKE '%" + searchField.getText() + "%' OR " +
+                    "name_goods_type LIKE '%" + searchField.getText() + "%' " +
+                    "" );
+            case Orders : break;
+            case Receipts : break;
+            case GoodsType : ConnectionDB.fillTable(mainTable, "SELECT id_goods_type AS \"ID\", name_goods_type AS \"Наименование\" FROM \"Main\".goods_type " +
+                    "WHERE name_goods_type LIKE '%" + searchField.getText() + "%'");
+            case Providers : ConnectionDB.fillTable(mainTable, "SELECT id_provider AS \"ID\", name AS \"Наименование\", inn AS \"ИНН\" FROM \"Main\".provider " +
+                    "WHERE name LIKE '%" + searchField.getText() + "%' OR " +
+                    "inn LIKE '%" + searchField.getText() + "%' " +
+                    "");
+            default : break;
+        }
     }
 
 
