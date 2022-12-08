@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RoyAlStilDesktop2.0:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RoyAlStilDesktop2_0_jar</output-path>
+    <root id="archive" name="RoyAlStilDesktop2.0.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/RoyAlStilDesktop/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="extracted-dir" path="$PROJECT_DIR$/RoyAlStilDesktop/src/main/resources/javax.mail.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/RoyAlStilDesktop/src/main/resources/activation-1.1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

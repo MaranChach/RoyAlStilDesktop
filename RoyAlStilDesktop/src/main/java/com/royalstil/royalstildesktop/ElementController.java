@@ -18,7 +18,7 @@ public class ElementController {
 
     protected ConnectionDB connection = new ConnectionDB();
 
-    public MainPage mainClass;
+    public MainPageController mainClass;
 
     protected HashMap<String, String> selectedRow;
 
@@ -70,7 +70,7 @@ public class ElementController {
             return false;
     }
 
-    public void setMainClass(MainPage mainClass){
+    public void setMainClass(MainPageController mainClass){
         this.mainClass = mainClass;
     }
 

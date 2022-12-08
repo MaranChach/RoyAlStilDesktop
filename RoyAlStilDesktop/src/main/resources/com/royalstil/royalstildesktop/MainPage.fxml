@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="471.0" prefWidth="696.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.MainPage">
+<AnchorPane prefHeight="471.0" prefWidth="696.0" styleClass="whiteBackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.MainPageController">
    <children>
       <VBox prefHeight="471.0" prefWidth="175.0" styleClass="menuPane" stylesheets="@style.css">
          <children>

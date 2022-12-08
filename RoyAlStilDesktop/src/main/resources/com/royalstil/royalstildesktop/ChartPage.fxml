@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.royalstil.royalstildesktop.ChartPageController">
    <children>
-      <PieChart fx:id="salesChart" layoutX="108.0" layoutY="24.0" prefHeight="400.0" prefWidth="592.0" title="Продажи" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="108.0" AnchorPane.rightAnchor="10.0" />
+      <PieChart fx:id="salesChart" layoutX="108.0" layoutY="24.0" title="Продажи" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="108.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="9.0" />
       <Label fx:id="caption" layoutX="50.0" layoutY="211.0" text=" ">
          <font>
             <Font size="18.0" />

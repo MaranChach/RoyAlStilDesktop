@@ -90,7 +90,7 @@ public class RegistrationPageController extends ElementController{
         confirmationCodeField.setDisable(false);
 
         confirmMessageLabel.setText("Код отправлен");
-        newNotification(confirmationCodeField);
+        newNotification(confirmMessageLabel);
     }
 
     @FXML
