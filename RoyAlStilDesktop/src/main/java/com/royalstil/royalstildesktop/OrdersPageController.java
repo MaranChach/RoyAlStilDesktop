@@ -77,7 +77,7 @@ public class OrdersPageController extends ElementController {
         clientsMap = connectionDB.sendQueryHashMap("SELECT id_client, second_name, first_name, email FROM \"Main\".clients");
         List list = new ArrayList<>(clientsMap.keySet());
         clientComboBox.setItems(FXCollections.observableArrayList(list));
-        setFonts();
+        //setFonts();
         setGoodsTable(goodsOnOrderTable);
         orderDatePicker.setValue(LocalDate.now());
     }

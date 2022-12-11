@@ -4,6 +4,7 @@ module com.royalstil.royalstildesktop {
     requires java.sql;
     requires java.mail;
     requires activation;
+    requires junit;
 
 
     opens com.royalstil.royalstildesktop to javafx.fxml;

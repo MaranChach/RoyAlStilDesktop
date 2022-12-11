@@ -11,6 +11,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class ChartPageController {
@@ -30,7 +33,6 @@ public class ChartPageController {
     public void setData(TableView reportTable) {
         this.reportTable = reportTable;
 
-
         ObservableList<PieChart.Data> dataList = FXCollections.observableArrayList();
         HashMap<String, Double> dataMap = new HashMap<>();
         for (int i = 0; i < reportTable.getItems().size(); i++) {
@@ -44,7 +46,6 @@ public class ChartPageController {
         }
         dataMap.forEach((key, value) -> dataList.add(new PieChart.Data(key, value)));
         salesChart.setData(dataList);
-
         for (final PieChart.Data data : salesChart.getData()) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED,
                     new EventHandler<MouseEvent>() {

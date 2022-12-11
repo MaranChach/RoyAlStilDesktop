@@ -63,7 +63,7 @@ public class RegistrationPageController extends ElementController{
 
     @FXML
     private void initialize(){
-        setFonts();
+        //setFonts();
     }
 
     private void setFonts(){
@@ -82,7 +82,10 @@ public class RegistrationPageController extends ElementController{
     }
 
     @FXML
-    private void onSendCodeButtonField(ActionEvent actionEvent) {
+    private void onSendCodeButtonField(ActionEvent actionEvent) throws SQLException, IOException {
+        if(!onEmailChanged(new ActionEvent()))
+            return;
+
         Integer code = new Random().nextInt(100000, 999999);
         confirmationCode = code.toString();
         EmailUtil.createEmail(emailField.getText() , confirmationCode);
@@ -107,19 +110,25 @@ public class RegistrationPageController extends ElementController{
         }
     }
 
-    public void onEmailChanged(ActionEvent actionEvent) throws SQLException, IOException {
+    public boolean onEmailChanged(ActionEvent actionEvent) throws SQLException, IOException {
         codeConfirmed = false;
         if (FieldsMatch.emailCheck(emailField.getText())){
             sendCodeButton.setDisable(false);
+            return true;
         }
         else {
-            sendCodeButton.setDisable(true);
+            //sendCodeButton.setDisable(true);
+            confirmMessageLabel.setText("Некорректный адрес");
+            newNotification(confirmMessageLabel);
+            return false;
         }
-        System.out.println();
     }
 
     @FXML
     private void onRegisterButtonField(ActionEvent actionEvent) throws SQLException, IOException {
+        onLoginChanged(new ActionEvent());
+        onPhoneNumberChanged(new ActionEvent());
+
         if(!(codeConfirmed && loginConfirmed && phoneNumberConfirmed)){
             newNotification(errorRegisterLabel);
             return;
@@ -156,10 +165,19 @@ public class RegistrationPageController extends ElementController{
 
     @FXML
     private void onPhoneNumberChanged(ActionEvent actionEvent) {
+        if (phoneNumberField.getText().equals("")){
+            phoneNumberConfirmed = false;
+            phoneNumberField.setText("Введите номер");
+            return;
+        }
+
         if (FieldsMatch.phoneNumberCheck(phoneNumberField.getText())){
             phoneNumberConfirmed = true;
         }
-        else
+        else {
             phoneNumberConfirmed = false;
+            phoneNumberField.setText("Некорректный номер");
+        }
+
     }
 }

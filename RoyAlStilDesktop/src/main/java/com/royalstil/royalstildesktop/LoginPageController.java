@@ -41,7 +41,7 @@ public class LoginPageController extends ElementController {
 
     @FXML
     private void initialize(){
-        setFonts();
+        //setFonts();
     }
 
     private void setFonts(){

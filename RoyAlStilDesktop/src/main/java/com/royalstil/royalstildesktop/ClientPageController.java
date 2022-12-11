@@ -63,7 +63,7 @@ public class ClientPageController extends ElementController{
     @FXML
     private void initialize(){
         connection = new ConnectionDB();
-        setFonts();
+        //setFonts();
     }
 
     @FXML

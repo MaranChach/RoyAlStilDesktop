@@ -251,19 +251,23 @@ public class MainPageController {
                     "phone_number LIKE '%" + searchField.getText() + "%' OR " +
                     "email LIKE '%" + searchField.getText() + "%'  " +
                     "" );
+                    break;
             case Goods : ConnectionDB.fillTable(mainTable, "SELECT id_goods AS \"ID\", name AS \"Наименование\", remind AS \"Остаток\", cost AS \"Цена\", used AS \"Б/У\", name_goods_type AS \"Тип\", image_url AS \"Картинка\" FROM \"Main\".goods " +
                     "INNER JOIN \"Main\".goods_type on id_goods_type = goods_type_id " +
                     "WHERE name LIKE '%" + searchField.getText() + "%' OR " +
                     "name_goods_type LIKE '%" + searchField.getText() + "%' " +
                     "" );
+                    break;
             case Orders : break;
             case Receipts : break;
             case GoodsType : ConnectionDB.fillTable(mainTable, "SELECT id_goods_type AS \"ID\", name_goods_type AS \"Наименование\" FROM \"Main\".goods_type " +
                     "WHERE name_goods_type LIKE '%" + searchField.getText() + "%'");
+                    break;
             case Providers : ConnectionDB.fillTable(mainTable, "SELECT id_provider AS \"ID\", name AS \"Наименование\", inn AS \"ИНН\" FROM \"Main\".provider " +
                     "WHERE name LIKE '%" + searchField.getText() + "%' OR " +
                     "inn LIKE '%" + searchField.getText() + "%' " +
                     "");
+                    break;
             default : break;
         }
     }
