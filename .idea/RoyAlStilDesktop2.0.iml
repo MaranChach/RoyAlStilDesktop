@@ -2,8 +2,10 @@
 <module version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <orderEntry type="jdk" jdkName="openjdk-19 (2)" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="javax.mail" level="project" />
     <orderEntry type="library" name="activation-1.1.1" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

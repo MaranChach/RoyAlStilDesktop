@@ -1,1 +1,3 @@
-jdbc:postgresql://46.229.214.241:5432/TrantinDB
+connection_string=jdbc:postgresql://46.229.214.241:5432/TrantinDB
+connection_login=Trantin
+connection_password=qwerty
