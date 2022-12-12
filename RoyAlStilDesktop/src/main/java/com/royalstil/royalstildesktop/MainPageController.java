@@ -77,12 +77,6 @@ public class MainPageController {
         openedMenu = Menus.Clients;
         addButton.setDisable(false);
         mainWindowLabel.setText(clientsButton.getText());
-        /*mainTable.getColumns().get(0).setText("ID");
-        mainTable.getColumns().get(1).setText("Фамилия");
-        mainTable.getColumns().get(2).setText("Имя");
-        mainTable.getColumns().get(3).setText("Номер телефона");
-        mainTable.getColumns().get(4).setText("Почта");
-        mainTable.getColumns().get(5).setText("Дата рождения");*/
     }
     @FXML
     public void onButtonOrdersClick(ActionEvent event) throws SQLException, IOException {
@@ -90,12 +84,6 @@ public class MainPageController {
         openedMenu = Menus.Orders;
         addButton.setDisable(false);
         mainWindowLabel.setText(ordersButton.getText());
-        /*mainTable.getColumns().get(0).setText("ID");
-        mainTable.getColumns().get(1).setText("Проведён");
-        mainTable.getColumns().get(2).setText("Фамилия");
-        mainTable.getColumns().get(3).setText("Имя");
-        mainTable.getColumns().get(4).setText("Почта");
-        mainTable.getColumns().get(5).setText("Дата");*/
     }
     @FXML
     public void onButtonGoodsClick(ActionEvent event) throws SQLException, IOException {
@@ -104,12 +92,6 @@ public class MainPageController {
         openedMenu = Menus.Goods;
         addButton.setDisable(false);
         mainWindowLabel.setText(goodsButton.getText());
-        /*mainTable.getColumns().get(0).setText("ID");
-        mainTable.getColumns().get(1).setText("Наименование");
-        mainTable.getColumns().get(2).setText("Остаток");
-        mainTable.getColumns().get(3).setText("Цена");
-        mainTable.getColumns().get(4).setText("Б/У");
-        mainTable.getColumns().get(5).setText("Тип");*/
     }
     @FXML
     public void onButtonProvidersClick(ActionEvent event) throws SQLException, IOException {
@@ -117,9 +99,6 @@ public class MainPageController {
         openedMenu = Menus.Providers;
         addButton.setDisable(false);
         mainWindowLabel.setText(providersButton.getText());
-        /*mainTable.getColumns().get(0).setText("ID");
-        mainTable.getColumns().get(1).setText("Наименование");
-        mainTable.getColumns().get(2).setText("ИНН");*/
     }
       @FXML
     public void onButtonReceiptsClick(ActionEvent event) throws SQLException, IOException {
@@ -127,10 +106,6 @@ public class MainPageController {
         openedMenu = Menus.Receipts;
         addButton.setDisable(false);
         mainWindowLabel.setText(receiptsButton.getText());
-        /*mainTable.getColumns().get(0).setText("ID");
-        mainTable.getColumns().get(1).setText("Проведён");
-        mainTable.getColumns().get(2).setText("Поставщик");
-        mainTable.getColumns().get(3).setText("Дата");*/
     }
     @FXML
     public void onButtonGoodsTypeClick(ActionEvent event) throws SQLException, IOException {
@@ -138,8 +113,6 @@ public class MainPageController {
         openedMenu = Menus.GoodsType;
         addButton.setDisable(false);
         mainWindowLabel.setText(goodsTypeButton.getText());
-        /*mainTable.getColumns().get(0).setText("ID");
-        mainTable.getColumns().get(1).setText("Наименование");*/
     }
 
     @FXML

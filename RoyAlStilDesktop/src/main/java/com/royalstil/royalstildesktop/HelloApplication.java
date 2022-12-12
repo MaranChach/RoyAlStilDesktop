@@ -20,8 +20,18 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+        FileReader fileReader = new FileReader();
+        try{
+            fileReader.confirmConfigSettings();
+            ConnectionDB.setSettings();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         launch();
-        /*ClassUML classUML = new ClassUML();
+
+        /*(ClassUML classUML = new ClassUML();
         Class[] classes = new Class[]{
                 ChartPageController.class, Client.class, ClientPageController.class,
                 ConnectionDB.class, ElementController.class, EmailUtil.class,
@@ -29,12 +39,11 @@ public class HelloApplication extends Application {
                 GoodsPageController.class, GoodsTypePageController.class, HelloApplication.class,
                 LoginPageController.class, MainPageController.class, Menus.class,
                 OrdersPageController.class, ProvidersPageController.class, ReportPageController.class,
-                RegistrationPageController.class, ReportPageController.class, SelectedGoods.class
+                RegistrationPageController.class, ReportPageController.class, SelectedGoods.class, ReceiptsPageController.class
         };
 
         for (Class className : classes) {
             classUML.printSummary(className);
         }*/
-
     }
 }

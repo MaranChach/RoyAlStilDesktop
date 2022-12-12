@@ -16,28 +16,22 @@ public class ConnectionDB {
     private Connection connection = null;
     private Statement statement = null;
 
-    public static String GetConnectionString() throws IOException {
-        //Path configPath = Path.of("\\RoyAlStilDesktop\\src\\main\\resources\\config");
-        //return Files.readString(configPath);
-        return "jdbc:postgresql://46.229.214.241:5432/TrantinDB";
-    }
+    public static String connectionString;
 
-    public static String GetLogin() throws IOException {
-        //Path configPath = Path.of("\\src\\config");
-        //return Files.readString(configPath);
-        return "PKS";
-    }
+    public static String connectionLogin;
 
-    public static String GetPassword() throws IOException {
-        //Path configPath = Path.of("\\src\\config");
-        //return Files.readString(configPath);
-        return "PKS";
+    public static String connectionPassword;
+
+    public static void setSettings(){
+        connectionString = FileReader.settings.get("connection_string");
+        connectionLogin = FileReader.settings.get("connection_login");
+        connectionPassword = FileReader.settings.get("connection_password");
     }
 
     public Connection Connect() throws IOException, SQLException{
         Connection connection = null;
         try{
-            connection = DriverManager.getConnection(GetConnectionString(), GetLogin(), GetPassword());
+            connection = DriverManager.getConnection(connectionString, connectionLogin, connectionPassword);
             this.connection = connection;
             return connection;
         }
