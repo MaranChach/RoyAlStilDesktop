@@ -16,17 +16,26 @@ public class ConnectionDB {
     private Connection connection = null;
     private Statement statement = null;
 
+    private static ConnectionDB globalConnection;
+
     private static String connectionString;
 
     private static String connectionLogin;
 
     private static String connectionPassword;
 
-    public static void setSettings(){
+    /*public static void setSettings(){
         connectionString = FileReader.settings.get("connection_string");
         connectionLogin = FileReader.settings.get("connection_login");
         connectionPassword = FileReader.settings.get("connection_password");
+    }*/
+
+    public static final void setSettings(String login, String password){
+        connectionString = FileReader.settings.get("connection_string");
+        connectionLogin = login;
+        connectionPassword = password;
     }
+
 
     public Connection Connect() throws IOException, SQLException{
         Connection connection = null;
@@ -37,10 +46,9 @@ public class ConnectionDB {
         }
         catch (SQLException e){
             System.out.println("Connection error");
-            e.printStackTrace();
+            //e.printStackTrace();
+            return null;
         }
-        this.connection = connection;
-        return connection;
     }
 
     public void Disconnect() throws SQLException {

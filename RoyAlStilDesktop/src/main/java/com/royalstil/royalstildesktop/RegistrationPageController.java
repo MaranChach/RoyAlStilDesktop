@@ -155,7 +155,7 @@ public class RegistrationPageController extends ElementController{
     @FXML
     private void onLoginChanged(ActionEvent actionEvent) throws SQLException, IOException {
         Statement statement = connection.Connect().createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM \"Main\".employees WHERE login LIKE '" + loginField.getText() + "'");
+        ResultSet resultSet = statement.executeQuery("SELECT USER " + loginField.getText());//* FROM \"Main\".employees WHERE login LIKE '" + loginField.getText() + "'");
 
         if (resultSet.next())
             loginField.setText("Логин не уникален");

@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,9 +58,36 @@ public class LoginPageController extends ElementController {
     @FXML
     void onLoginButtonClick(ActionEvent event) throws IOException, SQLException {
 
+        FileReader fileReader = new FileReader();
+        try {
+            fileReader.confirmConfigSettings();
+            ConnectionDB.setSettings(loginField.getText(), passwordField.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        Statement statement = connection.Connect().createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM \"Main\".employees WHERE login = " +
+        Connection connectionCheck;
+        try {
+            connectionCheck = connection.Connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getErrorCode());
+            return;
+        }
+        if (connectionCheck == null) {
+            newNotification(unknownLoginPasswordLabel);
+            return;
+        }
+
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MainPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setResizable(false);
+        stage.setTitle("Главное меню");
+        stage.setScene(scene);
+        stage.show();
+        loginField.getScene().getWindow().hide();
+        /*ResultSet resultSet = statement.executeQuery("SELECT * FROM \"Main\".employees WHERE login = " +
                 "'" +
                 loginField.getText() + "'");
 
@@ -70,17 +98,7 @@ public class LoginPageController extends ElementController {
         if (!resultSet.getString("password").equals(passwordField.getText())){
             newNotification(unknownLoginPasswordLabel);
             return;
-        }
-
-
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MainPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setResizable(false);
-        stage.setTitle("Главное меню");
-        stage.setScene(scene);
-        stage.show();
-        loginField.getScene().getWindow().hide();
+        }*/
     }
 
     @FXML

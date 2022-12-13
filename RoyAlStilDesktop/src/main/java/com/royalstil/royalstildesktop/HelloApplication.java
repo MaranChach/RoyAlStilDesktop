@@ -20,15 +20,6 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        FileReader fileReader = new FileReader();
-        try{
-            fileReader.confirmConfigSettings();
-            ConnectionDB.setSettings();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
         launch();
 
         /*(ClassUML classUML = new ClassUML();
