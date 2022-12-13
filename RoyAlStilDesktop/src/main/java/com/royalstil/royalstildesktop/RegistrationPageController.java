@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class RegistrationPageController extends ElementController{
     private TextField loginField;
 
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     @FXML
     private TextField phoneNumberField;

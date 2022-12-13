@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -11,11 +12,6 @@
       <AnchorPane layoutX="151.0" layoutY="100.0" minWidth="232.0" prefHeight="200.0" prefWidth="281.0" styleClass="registrationPane" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0">
          <children>
             <TextField fx:id="loginField" alignment="CENTER" layoutX="30.0" layoutY="40.0" promptText="Логин" styleClass="standartTextField" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="passwordField" alignment="CENTER" layoutX="30.0" layoutY="90.0" prefHeight="40.0" prefWidth="240.0" promptText="Пароль" styleClass="standartTextField" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="90.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -30,6 +26,11 @@
                   <Font size="13.0" />
                </font>
             </Button>
+            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="31.0" layoutY="91.0" prefHeight="40.0" prefWidth="240.0" promptText="Пароль" styleClass="standartTextField">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
          </children>
       </AnchorPane>
       <Label fx:id="unknownLoginPasswordLabel" alignment="CENTER" layoutX="180.0" layoutY="300.0" prefHeight="50.0" prefWidth="240.0" text="Неверный логин или пароль" textFill="RED" visible="false" wrapText="true">
