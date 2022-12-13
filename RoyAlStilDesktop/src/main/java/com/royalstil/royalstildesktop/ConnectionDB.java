@@ -16,11 +16,11 @@ public class ConnectionDB {
     private Connection connection = null;
     private Statement statement = null;
 
-    public static String connectionString;
+    private static String connectionString;
 
-    public static String connectionLogin;
+    private static String connectionLogin;
 
-    public static String connectionPassword;
+    private static String connectionPassword;
 
     public static void setSettings(){
         connectionString = FileReader.settings.get("connection_string");
