@@ -54,6 +54,8 @@ public class MainPageController {
     @FXML
     private Button goodsTypeButton;
     @FXML
+    private Button usersButton;
+    @FXML
     private Button reportButton;
     //endregion
     //region labelFields
@@ -71,6 +73,13 @@ public class MainPageController {
     }
 
     //region OnMenuButtonsClickEvents
+    @FXML
+    public void onButtonUsersClick(ActionEvent event) throws SQLException, IOException {
+        tableData = ConnectionDB.fillTable(mainTable, "SELECT id_employee AS \"ID\", second_name AS \"Фамилия\", first_name AS \"Имя\", email AS \"Почта\", phone_number AS \"Номер телефона\", login AS \"Логин\" FROM \"Main\".employees");
+        openedMenu = Menus.Employees;
+        addButton.setDisable(false);
+        mainWindowLabel.setText(usersButton.getText());
+    }
     @FXML
     public void onButtonClientsClick(ActionEvent event) throws SQLException, IOException {
         tableData = ConnectionDB.fillTable(mainTable, "SELECT id_client AS \"ID\", second_name AS \"Фамилия\", first_name AS \"Имя\", phone_number AS \"Номер телефона\", email AS \"Почта\", birth_date AS \"Дата рождения\" FROM \"Main\".clients");
@@ -198,6 +207,7 @@ public class MainPageController {
             case Receipts : return getClass().getResource("ReceiptsPage.fxml");
             case GoodsType : return getClass().getResource("GoodsTypePage.fxml");
             case Providers : return getClass().getResource("ProviderPage.fxml");
+            case Employees : return getClass().getResource("RegistrationPage.fxml");
             default : return null;
         }
     }

@@ -149,13 +149,23 @@ public class RegistrationPageController extends ElementController{
                 "', '" +
                 passwordField.getText() +
                 "')");
+        connection.sendQuery("CREATE ROLE \"" + loginField.getText() + "\" WITH" +
+                "  LOGIN" +
+                "  NOSUPERUSER" +
+                "  INHERIT" +
+                "  NOCREATEDB" +
+                "  NOCREATEROLE" +
+                "  NOREPLICATION" +
+                "  PASSWORD '" + passwordField.getText() + "';" +
+                "\n" +
+                "GRANT \"RoyalStilUsers\" TO \"" + loginField.getText() + "\";");
         firstNameField.getScene().getWindow().hide();
     }
 
     @FXML
     private void onLoginChanged(ActionEvent actionEvent) throws SQLException, IOException {
         Statement statement = connection.Connect().createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT USER " + loginField.getText());//* FROM \"Main\".employees WHERE login LIKE '" + loginField.getText() + "'");
+        ResultSet resultSet = statement.executeQuery("SELECT usename FROM pg_catalog.pg_user WHERE usename LIKE '" + loginField.getText() + "'");//* FROM \"Main\".employees WHERE login LIKE '" + loginField.getText() + "'");
 
         if (resultSet.next())
             loginField.setText("Логин не уникален");

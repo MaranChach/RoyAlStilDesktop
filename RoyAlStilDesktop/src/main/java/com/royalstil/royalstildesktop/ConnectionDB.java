@@ -46,7 +46,7 @@ public class ConnectionDB {
         }
         catch (SQLException e){
             System.out.println("Connection error");
-            //e.printStackTrace();
+            e.printStackTrace();
             return null;
         }
     }

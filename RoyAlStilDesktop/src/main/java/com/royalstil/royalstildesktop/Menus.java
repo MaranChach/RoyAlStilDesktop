@@ -6,5 +6,6 @@ public enum Menus {
     Goods,
     Receipts,
     GoodsType,
-    Providers
+    Providers,
+    Employees
 }
