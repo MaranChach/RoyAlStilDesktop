@@ -58,9 +58,8 @@ public class LoginPageController extends ElementController {
 
     @FXML
     void onLoginButtonClick(ActionEvent event) throws IOException, SQLException {
-
-        FileReader fileReader = new FileReader();
         try {
+            FileReader fileReader = new FileReader();
             fileReader.confirmConfigSettings();
             ConnectionDB.setSettings(loginField.getText(), passwordField.getText());
         } catch (Exception e) {

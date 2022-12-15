@@ -24,12 +24,6 @@ public class ConnectionDB {
 
     private static String connectionPassword;
 
-    /*public static void setSettings(){
-        connectionString = FileReader.settings.get("connection_string");
-        connectionLogin = FileReader.settings.get("connection_login");
-        connectionPassword = FileReader.settings.get("connection_password");
-    }*/
-
     public static final void setSettings(String login, String password){
         connectionString = FileReader.settings.get("connection_string");
         connectionLogin = login;
