@@ -169,7 +169,7 @@ public class MainPageController {
     }
 
     private void openNewScene(HashMap<String, String> valueMap) throws IOException {
-        Stage newStage = new Stage();
+        Stage newStage = HelloApplication.curStage;
         FXMLLoader loader = new FXMLLoader(getSceneFile());
         Parent root = loader.load();
         ElementController newPageController = loader.getController();
@@ -178,19 +178,19 @@ public class MainPageController {
         newPageController.setEditable(true);
         Scene newScene = new Scene(root);
         newStage.setScene(newScene);
-        newStage.setResizable(false);
+        //newStage.setResizable(false);
         newStage.show();
     }
 
     private void openNewScene() throws IOException {
-        Stage newStage = new Stage();
+        Stage newStage = HelloApplication.curStage;
         FXMLLoader loader = new FXMLLoader(getSceneFile());
         Parent root = loader.load();
         ElementController elementController = loader.getController();
         elementController.setMainClass(this);
         Scene newScene = new Scene(root);
         newStage.setScene(newScene);
-        newStage.setResizable(false);
+        //newStage.setResizable(false);
         newStage.show();
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -84,6 +85,7 @@ public class LoginPageController extends ElementController {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
         stage.setTitle("Главное меню");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/icon.png")));
         stage.setScene(scene);
         stage.show();
         loginField.getScene().getWindow().hide();
